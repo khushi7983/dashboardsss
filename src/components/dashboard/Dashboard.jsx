@@ -1,15 +1,15 @@
-import  {Building, Briefcase, DollarSign, Users } from "lucide-react";
-import StatsCard  from "./StatsCard";
+import { Building, Briefcase, DollarSign, Users } from "lucide-react";
+import StatsCard from "./StatsCard";
 import { useEffect, useState } from "react";
-import  ApplicationCard  from "./ApplicationCard";
-import  ChartCard  from "./ChartCard";
-import  EmployeeStructure  from "./EmployeeStructure";
-import  LeaveCard from "./LeaveCard";
-import  TodayCard  from "./TodayCard";
-import  TodoCard  from "./TodoCard";
-import  WelcomeCard  from "./WelcomeCard";
-import TeamActivity  from "./TeamActivity";
-import  DepartmentLeads  from "./DepartmentLeads";
+import ApplicationCard from "./ApplicationCard";
+import ChartCard from "./ChartCard";
+import EmployeeStructure from "./EmployeeStructure";
+import LeaveCard from "./LeaveCard";
+import TodayCard from "./TodayCard";
+import TodoCard from "./TodoCard";
+import WelcomeCard from "./WelcomeCard";
+import TeamActivity from "./TeamActivity";
+import DepartmentLeads from "./DepartmentLeads";
 import { useTheme } from "./ThemeProvider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -55,7 +55,7 @@ export default function Dashboard() {
     { trade: "SK", count: 110, below35: 45, age35to45: 40, above45: 25, date: "2025-03-01" },
     { trade: "TMM", count: 85, below35: 35, age35to45: 30, above45: 20, date: "2025-04-01" },
   ];
-  
+
   const trrdData = [
     { type: "Transfer", trade: "TA+", count: 30, below35: 15, age35to45: 10, above45: 5, date: "2025-01-20" },
     { type: "Retirement", trade: "FM", count: 20, below35: 5, age35to45: 5, above45: 10, date: "2025-02-05" },
@@ -79,27 +79,27 @@ export default function Dashboard() {
   useEffect(() => {
     setChartData({
       pie: [
-        { category: "AOB", sanction: 300, borne: 210, colorStart: "#1E90FF", colorEnd: "#0000CD" },
-        { category: "SSWC", sanction: 1200, borne: 1000, colorStart: "#FFD700", colorEnd: "#FFA500" },
-        { category: "SMW", sanction: 600, borne: 500, colorStart: "#FFFFFF", colorEnd: "#F5F5F5" },
-        { category: "NAW", sanction: 800, borne: 650, colorStart: "#FF6347", colorEnd: "#B22222" },
-        { category: "SSS", sanction: 1500, borne: 1300, colorStart: "#FFD700", colorEnd: "#FFA500" },
-        { category: "NDV", sanction: 6000, borne: 5000, colorStart: "#FF6347", colorEnd: "#B22222" },
-        { category: "GOI", sanction: 1800, borne: 1600, colorStart: "#1E90FF", colorEnd: "#0000CD" },
+        { category: "AOB", sanction: 300, borne: 210, colorStart: "#1E90FF", colorEnd: "#0000CD", label: "Administrative Officer Battalions" },
+        { category: "SSWC", sanction: 1200, borne: 1000, colorStart: "#FFD700", colorEnd: "#FFA500", label: "Supply and Services Wing Command" },
+        { category: "SMW", sanction: 600, borne: 500, colorStart: "#FFFFFF", colorEnd: "#F5F5F5", label: "Signal Maintenance Wing" },
+        { category: "NAW", sanction: 800, borne: 650, colorStart: "#FF6347", colorEnd: "#B22222", label: "Network Administration Wing" },
+        { category: "SSS", sanction: 1500, borne: 1300, colorStart: "#FFD700", colorEnd: "#FFA500", label: "Support Services Squadron" },
+        { category: "NDV", sanction: 6000, borne: 5000, colorStart: "#FF6349", colorEnd: "#B22222", label: "Network Development" },
+        { category: "GOI", sanction: 1800, borne: 1600, colorStart: "#1E90FF", colorEnd: "#0000CD", label: "General Operations Infantry" },
       ],
       bar: [
-        { month: "Jan", I: 50, M: 30 },
-        { month: "Feb", I: 60, M: 35 },
-        { month: "Mar", I: 70, M: 40 },
-        { month: "Apr", I: 80, M: 45 },
-        { month: "May", I: 90, M: 50 },
-        { month: "Jun", I: 100, M: 55 },
-        { month: "Jul", I: 110, M: 60 },
-        { month: "Aug", I: 120, M: 65 },
-        { month: "Sep", I: 130, M: 70 },
-        { month: "Oct", I: 140, M: 75 },
-        { month: "Nov", I: 150, M: 80 },
-        { month: "Dec", I: 160, M: 85 },
+        { month: "Jan", I: 50, M: 30, label: "January 2025" },
+        { month: "Feb", I: 60, M: 35, label: "February 2025" },
+        { month: "Mar", I: 70, M: 40, label: "March 2025" },
+        { month: "Apr", I: 80, M: 45, label: "April 2025" },
+        { month: "May", I: 90, M: 50, label: "May 2025" },
+        { month: "Jun", I: 100, M: 55, label: "June 2025" },
+        { month: "Jul", I: 110, M: 60, label: "July 2025" },
+        { month: "Aug", I: 120, M: 65, label: "August 2025" },
+        { month: "Sep", I: 130, M: 70, label: "September 2025" },
+        { month: "Oct", I: 140, M: 75, label: "October 2025" },
+        { month: "Nov", I: 150, M: 80, label: "November 2025" },
+        { month: "Dec", I: 160, M: 85, label: "December 2025" },
       ],
     });
   }, []);
@@ -143,16 +143,23 @@ export default function Dashboard() {
   };
 
   return (
-    <div className={`px-6 py-8 ${
-      theme === "dark" ? "bg-gradient-to-br from-gray-900 to-gray-800 text-white" : "bg-gray-50 text-gray-900"
-    } min-h-screen`}>
+    <div
+      className={`px-10 py-8 w-[calc(100vw-256px)] ${
+        theme === "dark"
+          ? "bg-gradient-to-br from-gray-900 to-gray-800 text-white"
+          : "bg-gray-50 text-gray-900"
+      } min-h-screen overflow-x-auto`}
+    >
       {/* Breadcrumb */}
       <nav className="mb-6">
         <ol className="flex text-sm font-medium">
           <li className="flex items-center">
-            <a href="#" className={`${
-              theme === "dark" ? "text-blue-400 hover:text-blue-300" : "text-blue-600 hover:text-blue-700"
-            } transition-colors`}>
+            <a
+              href="#"
+              className={`${
+                theme === "dark" ? "text-blue-400 hover:text-blue-300" : "text-blue-600 hover:text-blue-700"
+              } transition-colors`}
+            >
               Home
             </a>
             <span className={`mx-2 ${theme === "dark" ? "text-gray-500" : "text-gray-400"}`}>/</span>
@@ -163,12 +170,16 @@ export default function Dashboard() {
 
       {/* Page Header */}
       <div className="mb-8">
-        <h4 className={`text-3xl font-bold tracking-tight ${
-          theme === "dark" ? "text-white" : "text-gray-900"
-        }`}>Admin Dashboard</h4>
+        <h4
+          className={`text-3xl font-bold tracking-tight ${
+            theme === "dark" ? "text-white" : "text-gray-900"
+          }`}
+        >
+          Admin Dashboard
+        </h4>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="gap-6">
         {/* Main Dashboard Content */}
         <div className="lg:col-span-9 space-y-6">
           {/* Stats Cards */}
@@ -180,13 +191,14 @@ export default function Dashboard() {
           </div>
 
           {/* Charts */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 min-h-[600px]">
             {chartData.pie && (
               <ChartCard
                 title="Sanction Overview"
                 chartType="pie"
                 chartData={chartData.pie}
                 selectOptions={["This Year", "Last Year", "All Time"]}
+                height={600} // Increased height to 600px for larger pie chart
               />
             )}
             {chartData.bar && (
@@ -195,25 +207,32 @@ export default function Dashboard() {
                 chartType="bar"
                 chartData={chartData.bar}
                 selectOptions={["2025", "2024", "2023"]}
+                height={600}
               />
             )}
           </div>
 
           {/* Tables Section */}
-          <div className="grid grid-cols-1 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Trade Wise Section */}
-            <div className={`p-6 rounded-lg ${
-              theme === "dark" ? "bg-gray-800" : "bg-white"
-            } shadow-lg transition-all duration-300`}>
+            <div
+              className={`p-6 rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } shadow-lg hover:shadow-xl transition-all duration-300 border ${
+                theme === "dark" ? "border-gray-700" : "border-gray-200"
+              }`}
+            >
               <h5 className="text-xl font-semibold mb-4">Trade Wise</h5>
               <div className="flex flex-wrap gap-4 mb-6">
                 <Select
                   value={tradeFilters.trade}
                   onValueChange={(value) => setTradeFilters({ ...tradeFilters, trade: value })}
                 >
-                  <SelectTrigger className={`w-[200px] ${
-                    theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
-                  }`}>
+                  <SelectTrigger
+                    className={`w-[200px] ${
+                      theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
+                    }`}
+                  >
                     <SelectValue placeholder="Select Trade" />
                   </SelectTrigger>
                   <SelectContent>
@@ -228,9 +247,11 @@ export default function Dashboard() {
                   value={tradeFilters.age}
                   onValueChange={(value) => setTradeFilters({ ...tradeFilters, age: value })}
                 >
-                  <SelectTrigger className={`w-[150px] ${
-                    theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
-                  }`}>
+                  <SelectTrigger
+                    className={`w-[150px] ${
+                      theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
+                    }`}
+                  >
                     <SelectValue placeholder="Select Age" />
                   </SelectTrigger>
                   <SelectContent>
@@ -275,54 +296,73 @@ export default function Dashboard() {
                 </Popover>
                 <Button
                   onClick={() =>
-                    setTradeFilters({ trade: "All", age: "All", dateRange: { from: null, to: null }, allTime: true })
+                    setTradeFilters({
+                      trade: "All",
+                      age: "All",
+                      dateRange: { from: null, to: null },
+                      allTime: true,
+                    })
                   }
-                  className={theme === "dark" ? "bg-blue-600 hover:bg-blue-700" : "bg-blue-500 hover:bg-blue-600"}
+                  className={
+                    theme === "dark" ? "bg-blue-600 hover:bg-blue-700" : "bg-blue-500 hover:bg-blue-600"
+                  }
                 >
                   All Time
                 </Button>
               </div>
-              <div className="space-y-4">
-                <AnimatePresence>
-                  {filteredTradeData.map((item) => (
-                    <motion.div
-                      key={item.trade}
-                      variants={cardVariants}
-                      initial="hidden"
-                      animate="visible"
-                      exit="exit"
-                      className={`p-4 rounded-lg shadow-md ${
-                        theme === "dark"
-                          ? "bg-gray-700 hover:bg-gray-600"
-                          : "bg-gray-100 hover:bg-gray-200"
-                      } transition-all duration-200 flex justify-between items-center`}
+              <div className="overflow-x-auto">
+                <Table
+                  className={`w-full ${
+                    theme === "dark" ? "border-gray-700" : "border-gray-200"
+                  } rounded-lg overflow-hidden`}
+                >
+                  <TableHeader>
+                    <TableRow
+                      className={`${
+                        theme === "dark" ? "bg-gray-700 hover:bg-gray-600" : "bg-gray-100"
+                      }`}
                     >
-                      <div className="flex-1">
-                        <p className="font-semibold">{item.trade}</p>
-                        <p className="text-sm text-muted-foreground">Date: {item.date}</p>
-                      </div>
-                      <div className="flex-1 text-center">
-                        <p className="font-medium">Total: {item.count}</p>
-                      </div>
-                      <div className="flex-1 text-center">
-                        <p className="text-sm">Below 35: {item.below35}</p>
-                      </div>
-                      <div className="flex-1 text-center">
-                        <p className="text-sm">35-45: {item.age35to45}</p>
-                      </div>
-                      <div className="flex-1 text-center">
-                        <p className="text-sm">Above 45: {item.above45}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
+                      <TableHead className="font-semibold">Trade</TableHead>
+                      <TableHead className="font-semibold">Date</TableHead>
+                      <TableHead className="font-semibold text-center">Total</TableHead>
+                      <TableHead className="font-semibold text-center">Below 35</TableHead>
+                      <TableHead className="font-semibold text-center">35-45</TableHead>
+                      <TableHead className="font-semibold text-center">Above 45</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <AnimatePresence>
+                      {filteredTradeData.map((item) => (
+                        <motion.tr
+                          key={item.trade}
+                          variants={cardVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          className={theme === "dark" ? "hover:bg-gray-600" : "hover:bg-gray-200"}
+                        >
+                          <TableCell className="font-semibold">{item.trade}</TableCell>
+                          <TableCell>{item.date}</TableCell>
+                          <TableCell className="text-center">{item.count}</TableCell>
+                          <TableCell className="text-center">{item.below35}</TableCell>
+                          <TableCell className="text-center">{item.age35to45}</TableCell>
+                          <TableCell className="text-center">{item.above45}</TableCell>
+                        </motion.tr>
+                      ))}
+                    </AnimatePresence>
+                  </TableBody>
+                </Table>
               </div>
             </div>
 
             {/* Transfer Retirement Resignation Death Section */}
-            <div className={`p-6 rounded-lg ${
-              theme === "dark" ? "bg-gray-800" : "bg-white"
-            } shadow-lg transition-all duration-300`}>
+            <div
+              className={`p-6 rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } shadow-lg hover:shadow-xl transition-all duration-300 border ${
+                theme === "dark" ? "border-gray-700" : "border-gray-200"
+              }`}
+            >
               <h5 className="text-xl font-semibold mb-4">Transfer Retirement Resignation Death</h5>
               <Tabs defaultValue="Transfer" className="mb-6">
                 <TabsList className={theme === "dark" ? "bg-gray-700" : "bg-gray-100"}>
@@ -369,9 +409,11 @@ export default function Dashboard() {
                       value={trrdFilters.trade}
                       onValueChange={(value) => setTrrdFilters({ ...trrdFilters, trade: value })}
                     >
-                      <SelectTrigger className={`w-[200px] ${
-                        theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
-                      }`}>
+                      <SelectTrigger
+                        className={`w-[200px] ${
+                          theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
+                        }`}
+                      >
                         <SelectValue placeholder="Select Trade" />
                       </SelectTrigger>
                       <SelectContent>
@@ -386,9 +428,11 @@ export default function Dashboard() {
                       value={trrdFilters.age}
                       onValueChange={(value) => setTrrdFilters({ ...trrdFilters, age: value })}
                     >
-                      <SelectTrigger className={`w-[150px] ${
-                        theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
-                      }`}>
+                      <SelectTrigger
+                        className={`w-[150px] ${
+                          theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
+                        }`}
+                      >
                         <SelectValue placeholder="Select Age" />
                       </SelectTrigger>
                       <SelectContent>
@@ -432,52 +476,53 @@ export default function Dashboard() {
                       </PopoverContent>
                     </Popover>
                   </div>
-                  <div className="space-y-4">
-                    <AnimatePresence>
-                      {filteredTrrdData.map((item) => (
-                        <motion.div
-                          key={`${item.type}-${item.trade}`}
-                          variants={cardVariants}
-                          initial="hidden"
-                          animate="visible"
-                          exit="exit"
-                          className={`p-4 rounded-lg shadow-md ${
-                            theme === "dark"
-                              ? "bg-gray-700 hover:bg-gray-600"
-                              : "bg-gray-100 hover:bg-gray-200"
-                          } transition-all duration-200 flex justify-between items-center`}
+                  <div className="overflow-x-auto">
+                    <Table
+                      className={`w-full ${
+                        theme === "dark" ? "border-gray-700 shadow-md hover:shadow-lg rounded-lg" : "border-gray-200"
+                      } rounded-lg overflow-hidden`}
+                    >
+                      <TableHeader>
+                        <TableRow
+                          className={`${
+                            theme === "dark" ? "bg-gray-700 hover:bg-gray-600" : "bg-gray-100"
+                          }`}
                         >
-                          <div className="flex-1">
-                            <p className="font-semibold">{item.trade}</p>
-                            <p className="text-sm text-muted-foreground">Date: {item.date}</p>
-                          </div>
-                          <div className="flex-1 text-center">
-                            <p className="font-medium">Total: {item.count}</p>
-                          </div>
-                          <div className="flex-1 text-center">
-                            <p className="text-sm">Below 35: {item.below35}</p>
-                          </div>
-                          <div className="flex-1 text-center">
-                            <p className="text-sm">35-45: {item.age35to45}</p>
-                          </div>
-                          <div className="flex-1 text-center">
-                            <p className="text-sm">Above 45: {item.above45}</p>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </AnimatePresence>
+                          <TableHead className="font-semibold">Trade</TableHead>
+                          <TableHead className="font-semibold">Date</TableHead>
+                          <TableHead className="font-semibold text-center">Total</TableHead>
+                          <TableHead className="font-semibold text-center">Below 35</TableHead>
+                          <TableHead className="font-semibold text-center">35-45</TableHead>
+                          <TableHead className="font-semibold text-center">Above 45</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        <AnimatePresence>
+                          {filteredTrrdData.map((item) => (
+                            <motion.tr
+                              key={`${item.type}-${item.trade}`}
+                              variants={cardVariants}
+                              initial="hidden"
+                              animate="visible"
+                              exit="exit"
+                              className={theme === "dark" ? "hover:bg-gray-600" : "hover:bg-gray-200"}
+                            >
+                              <TableCell className="font-semibold">{item.trade}</TableCell>
+                              <TableCell>{item.date}</TableCell>
+                              <TableCell className="text-center">{item.count}</TableCell>
+                              <TableCell className="text-center">{item.below35}</TableCell>
+                              <TableCell className="text-center">{item.age35to45}</TableCell>
+                              <TableCell className="text-center">{item.above45}</TableCell>
+                            </motion.tr>
+                          ))}
+                        </AnimatePresence>
+                      </TableBody>
+                    </Table>
                   </div>
                 </TabsContent>
               </Tabs>
             </div>
           </div>
-        </div>
-
-        {/* Sidebar Content */}
-        <div className="lg:col-span-3 space-y-6">
-          <WelcomeCard />
-          <TeamActivity />
-          <DepartmentLeads />
         </div>
       </div>
     </div>

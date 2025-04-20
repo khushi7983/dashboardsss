@@ -37,6 +37,7 @@ export default function DashboardSidebar() {
         { label: "SPV" }
       ]
     },
+    { icon: Building, label: "Hierarchy" },
     { icon: Building, label: "Company" },
     { icon: Calendar, label: "Calendar" },
     { icon: Briefcase, label: "Leave" },
@@ -112,7 +113,7 @@ export default function DashboardSidebar() {
         </div>
       </SidebarHeader>
 
-      <SidebarContent className="overflow-y-auto scrollbar-hide">
+      {/* <SidebarContent className="overflow-y-auto scrollbar-hide">
         <SidebarMenu className="mt-4">
           <AnimatePresence>
             {navItems.map((item, index) => (
@@ -224,7 +225,135 @@ export default function DashboardSidebar() {
             ))}
           </AnimatePresence>
         </SidebarMenu>
-      </SidebarContent>
+      </SidebarContent> */}
+      <SidebarContent className="overflow-y-auto scrollbar-hide">
+  <SidebarMenu className="mt-4">
+    <AnimatePresence>
+      {navItems.map((item, index) => (
+        <motion.div
+          key={item.label}
+          custom={index}
+          variants={menuItemVariants}
+          initial="hidden"
+          animate="visible"
+          whileHover="hover"
+        >
+          <SidebarMenuItem>
+            {item.subItems ? (
+              <>
+                <SidebarMenuButton
+                  asChild
+                  isActive={item.active}
+                  tooltip={item.label}
+                  className={`${
+                    item.active
+                      ? theme === "dark"
+                        ? "bg-blue-700 text-white"
+                        : "bg-blue-100 text-blue-800"
+                      : theme === "dark"
+                      ? "text-gray-300 hover:bg-gray-800"
+                      : "text-gray-700 hover:bg-gray-100"
+                  } rounded-lg transition-all duration-200 py-3 px-4 flex justify-between items-center w-full`}
+                  onClick={() => setIsAlliedUnitsOpen(!isAlliedUnitsOpen)}
+                >
+                  <div className="flex items-center gap-3">
+                    <item.icon
+                      className={`h-5 w-5 ${
+                        item.active
+                          ? "text-blue-400"
+                          : theme === "dark"
+                          ? "text-gray-400"
+                          : "text-gray-500"
+                      }`}
+                    />
+                    <span className="font-medium">{item.label}</span>
+                    {isAlliedUnitsOpen ? (
+                      <ChevronDown className="h-4 w-4 ml-auto" />
+                    ) : (
+                      <ChevronRight className="h-4 w-4 ml-auto" />
+                    )}
+                  </div>
+                </SidebarMenuButton>
+                <AnimatePresence>
+                  {isAlliedUnitsOpen && (
+                    <motion.div
+                      variants={subMenuVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="hidden"
+                    >
+                      <SidebarMenuSub className="pl-8">
+                        {item.subItems.map((subItem) => (
+                          <SidebarMenuSubItem key={subItem.label}>
+                            <SidebarMenuSubButton
+                              asChild
+                              className={`${
+                                theme === "dark"
+                                  ? "text-gray-400 hover:bg-gray-700"
+                                  : "text-gray-600 hover:bg-gray-50"
+                              } rounded-md transition-all duration-200 py-2 px-3 text-sm w-full`}
+                            >
+                              <a href="/" className="flex items-center gap-2">
+                                <span>{subItem.label}</span>
+                              </a>
+                            </SidebarMenuSubButton>
+                          </SidebarMenuSubItem>
+                        ))}
+                      </SidebarMenuSub>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </>
+            ) : (
+              <SidebarMenuButton
+                asChild
+                isActive={item.active}
+                tooltip={item.label}
+                className={`${
+                  item.active
+                    ? theme === "dark"
+                      ? "bg-blue-700 text-white"
+                      : "bg-blue-100 text-blue-800"
+                    : theme === "dark"
+                    ? "text-gray-300 hover:bg-gray-800"
+                    : "text-gray-700 hover:bg-gray-100"
+                } rounded-lg transition-all duration-200 py-3 px-4 w-full`}
+              >
+                {item.label === "Hierarchy" ? (
+                  <a href="/hierarchy" className="flex items-center gap-3">
+                    <item.icon
+                      className={`h-5 w-5 ${
+                        item.active
+                          ? "text-blue-400"
+                          : theme === "dark"
+                          ? "text-gray-400"
+                          : "text-gray-500"
+                      }`}
+                    />
+                    <span className="font-medium">{item.label}</span>
+                  </a>
+                ) : (
+                  <a href="/" className="flex items-center gap-3">
+                    <item.icon
+                      className={`h-5 w-5 ${
+                        item.active
+                          ? "text-blue-400"
+                          : theme === "dark"
+                          ? "text-gray-400"
+                          : "text-gray-500"
+                      }`}
+                    />
+                    <span className="font-medium">{item.label}</span>
+                  </a>
+                )}
+              </SidebarMenuButton>
+            )}
+          </SidebarMenuItem>
+        </motion.div>
+      ))}
+    </AnimatePresence>
+  </SidebarMenu>
+</SidebarContent>
 
       <SidebarFooter>
         <div className="p-4">

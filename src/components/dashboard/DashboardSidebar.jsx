@@ -28,7 +28,6 @@ export default function DashboardSidebar() {
   const navItems = [
     { icon: Home, label: "ASD", route: "/" },
     { icon: Users, label: "NDV", route: "/nvd_dashboard" },
-    { icon: Users, label: "HR", route: "/hr_dashboard" },
     {
       icon: Building,
       label: "Allied Units",
@@ -40,13 +39,13 @@ export default function DashboardSidebar() {
       ]
     },
     { icon: Building, label: "Hierarchy", route: "/hierarchy" },
-    { icon: Building, label: "Company", route: "/company" },
-    { icon: Calendar, label: "Calendar", route: "/calendar" },
-    { icon: Briefcase, label: "Leave", route: "/leave" },
-    { icon: Star, label: "Review", route: "/review" },
-    { icon: FileText, label: "Report", route: "/report" },
-    { icon: FileCog, label: "Manage", route: "/manage" },
-    { icon: SlidersHorizontal, label: "Settings", route: "/settings" }
+    // { icon: Building, label: "Company", route: "/company" },
+    // { icon: Calendar, label: "Calendar", route: "/calendar" },
+    // { icon: Briefcase, label: "Leave", route: "/leave" },
+    // { icon: Star, label: "Review", route: "/review" },
+    // { icon: FileText, label: "Report", route: "/report" },
+    // { icon: FileCog, label: "Manage", route: "/manage" },
+    // { icon: SlidersHorizontal, label: "Settings", route: "/settings" }
   ];
 
   const menuItemVariants = {

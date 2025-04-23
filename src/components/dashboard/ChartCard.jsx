@@ -94,7 +94,7 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
       chart = am4core.create(chartRef.current, am4charts.PieChart3D);
       chart.depth = 35;
       chart.angle = 30;
-      chart.innerRadius = am4core.percent(10);
+      chart.innerRadius = am4core.percent(25);
       // Set chart height dynamically based on the height prop
       chartRef.current.style.height = `${height}px`;
     } else if (chartType === "bar") {
@@ -102,6 +102,10 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
       chart.padding(10, 10, 10, 10);
       // Set chart height to match pie chart height
       chartRef.current.style.height = `${height}px`;
+    } else if (chartType === "clustered-bar") {
+      chart = am4core.create(chartRef.current, am4charts.XYChart3D);
+      chartRef.current.style.height = `${height}px`;
+      chart.padding(10, 10, 10, 10);
     } else {
       console.error("Unsupported chart type:", chartType);
       return;
@@ -193,25 +197,19 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
       tooltip.boxShadow.opacity = 0.2;
       tooltip.zIndex = 1000;
       tooltip.animationDuration = 400;
-      
       // Enhanced legend
       chart.legend = new am4charts.Legend();
-      chart.legend.position = "right";
-      chart.legend.width = am4core.percent(35);
-      chart.legend.scrollable = true;
-      chart.legend.maxHeight = height * 0.9;
+      chart.legend.position = "bottom";
+      chart.legend.contentAlign = "center";
+      chart.legend.layout = "horizontal"; // Ensure legend items are displayed in a single row
       
       // Fix truncated labels in legend
       chart.legend.labels.template.truncate = false;
       chart.legend.labels.template.wrap = true;
       chart.legend.labels.template.maxWidth = 150;
       chart.legend.itemContainers.template.paddingTop = 5;
-      chart.legend.itemContainers.template.paddingBottom = 5;
+      chart.legend.itemContainers.template.paddingBottom = 25;
       chart.legend.useDefaultMarker = false;
-      
-      // Adjust the chart layout for better visualization
-      chart.innerRadius = am4core.percent(25);
-      chart.radius = am4core.percent(85);
       
       // Custom legend markers
       let marker = chart.legend.markers.template.children.getIndex(0);
@@ -225,8 +223,8 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
       
       // Improve legend labels styling
       chart.legend.labels.template.fill = am4core.color(theme === "dark" ? "#FFFFFF" : "#333333");
-      chart.legend.labels.template.fontSize = 13;
-      chart.legend.valueLabels.template.fontSize = 13;
+      chart.legend.labels.template.fontSize = 14;
+      chart.legend.valueLabels.template.fontSize = 14;
       chart.legend.valueLabels.template.fill = am4core.color(theme === "dark" ? "#D1D5DB" : "#4B5563");
       
       // Add more space between legend items
@@ -237,9 +235,14 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
       // Add value to legend labels
       chart.legend.valueLabels.template.text = "{value.percent.formatNumber('#.#')}%";
       
-      // Adjust chart padding
+      // Adjust chart padding 
       chart.paddingRight = 25;
       chart.legend.marginLeft = 15;
+
+      // Ensure legend utilizes only required space
+      chart.legend.itemContainers.template.width = am4core.percent(100);
+      chart.legend.itemContainers.template.maxWidth = undefined;
+      chart.legend.itemContainers.template.minWidth = undefined;
       
     } else if (chartType === "bar") {
       chart.data = chartData;
@@ -361,7 +364,68 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
       chart.cursor.lineY.strokeWidth = 0;
       chart.cursor.behavior = "zoomXY";
     }
-
+    else if (chartType === "clustered-bar") {
+      chart = am4core.create(chartRef.current, am4charts.XYChart3D);
+      chart.padding(10, 10, 10, 10);
+      chartRef.current.style.height = `${height}px`;
+    
+      chart.data = chartData;
+    
+      let xAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+      xAxis.dataFields.category = "category";
+      xAxis.renderer.grid.template.location = 0;
+      xAxis.renderer.labels.template.fill = am4core.color(theme === "dark" ? "#FFFFFF" : "#333333");
+      xAxis.renderer.labels.template.fontWeight = "bold";
+      xAxis.renderer.grid.template.stroke = am4core.color(theme === "dark" ? "#FFD700" : "#FFA500");
+      xAxis.renderer.labels.template.fontSize = 12;
+      xAxis.renderer.cellStartLocation = 0.1;
+      xAxis.renderer.cellEndLocation = 0.9;
+      xAxis.title.text = "Categories";
+      xAxis.title.fill = am4core.color(theme === "dark" ? "#D1D5DB" : "#FFD700");
+    
+      let yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+      yAxis.min = 0;
+      yAxis.renderer.labels.template.fill = am4core.color(theme === "dark" ? "#FFFFFF" : "#333333");
+      yAxis.renderer.grid.template.stroke = am4core.color(theme === "dark" ? "#FFD700" : "#FFA500");
+      yAxis.renderer.grid.template.strokeOpacity = 0.3;
+      yAxis.title.text = "Values";
+      yAxis.title.fill = am4core.color(theme === "dark" ? "#D1D5DB" : "#FFD700");
+    
+      // Create multiple series based on keys
+      const keys = Object.keys(chartData[0]).filter(k => k !== "category");
+      const colors = getDistinctColors(keys.length, theme);
+    
+      keys.forEach((key, index) => {
+        const series = chart.series.push(new am4charts.ColumnSeries3D());
+        series.dataFields.valueY = key;
+        series.dataFields.categoryX = "category";
+        series.name = key;
+        series.columns.template.tooltipText = `[bold]{name}[/]\n{categoryX}: {valueY}`;
+        series.columns.template.fillOpacity = 0.9;
+        series.columns.template.width = am4core.percent(70);
+        series.columns.template.showOnInit = true;
+        series.columns.template.animationDuration = 600;
+    
+        // Apply gradient
+        const gradient = new am4core.LinearGradient();
+        gradient.rotation = 90;
+        gradient.addColor(am4core.color(colors[index].colorStart));
+        gradient.addColor(am4core.color(colors[index].colorEnd));
+        series.columns.template.fill = gradient;
+        series.columns.template.stroke = am4core.color(theme === "dark" ? "#1F2937" : "#FFFFFF");
+        series.columns.template.strokeWidth = 1;
+    
+        let hoverState = series.columns.template.states.create("hover");
+        hoverState.properties.fillOpacity = 1;
+        hoverState.properties.scale = 1.05;
+      });
+    
+      chart.legend = new am4charts.Legend();
+      chart.legend.position = "top";
+      chart.legend.contentAlign = "center";
+      chart.legend.labels.template.fill = am4core.color(theme === "dark" ? "#FFFFFF" : "#333333");
+    }
+    
     chartInstance.current = chart;
 
     return () => {
@@ -375,9 +439,9 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
     <Card className={`${
       theme === "dark" ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"
     } shadow-lg hover:shadow-xl rounded-lg overflow-hidden transition-all duration-300`}>
-      <CardHeader className="flex flex-row items-center justify-between px-6 py-4 border-b border-opacity-50 border-gray-200">
-        <CardTitle className={`text-lg font-semibold ${
-          theme === "dark" ? "text-blue-300" : "text-blue-700"
+      <CardHeader className="flex flex-row items-center justify-between border-b border-opacity-50 border-gray-200">
+        <CardTitle className={`text-[40] font-semibold ${
+          theme === "dark" ? "text-blue-200" : "text-blue-300"
         }`}>{title}</CardTitle>
         {selectOptions && (
           <Select defaultValue={selectOptions[0]}>
@@ -385,7 +449,7 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
               theme === "dark"
                 ? "bg-gray-700 text-gray-200 border-gray-600"
                 : "bg-gray-50 text-gray-900 border-gray-300"
-            } rounded-md text-sm font-medium focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200`}>
+            } rounded-md text-sm font-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200`}>
               <SelectValue placeholder={selectOptions[0]} />
             </SelectTrigger>
             <SelectContent className={`${

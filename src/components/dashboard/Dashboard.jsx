@@ -80,27 +80,22 @@ export default function Dashboard() {
     setChartData({
       pie: [
         { category: "AOB", sanction: 300, borne: 210, colorStart: "#1E90FF", colorEnd: "#0000CD", label: "Administrative Officer Battalions" },
-        { category: "SSWC", sanction: 1200, borne: 1000, colorStart: "#FFD700", colorEnd: "#FFA500", label: "Supply and Services Wing Command" },
-        { category: "SMW", sanction: 600, borne: 500, colorStart: "#FFFFFF", colorEnd: "#F5F5F5", label: "Signal Maintenance Wing" },
-        { category: "NAW", sanction: 800, borne: 650, colorStart: "#FF6347", colorEnd: "#B22222", label: "Network Administration Wing" },
-        { category: "SSS", sanction: 1500, borne: 1300, colorStart: "#FFD700", colorEnd: "#FFA500", label: "Support Services Squadron" },
         { category: "NDV", sanction: 6000, borne: 5000, colorStart: "#FF6349", colorEnd: "#B22222", label: "Network Development" },
-        { category: "GOI", sanction: 1800, borne: 1600, colorStart: "#1E90FF", colorEnd: "#0000CD", label: "General Operations Infantry" },
+        { category: "OWC", sanction: 1200, borne: 1000, colorStart: "#FFD700", colorEnd: "#FFA500", label: "Operational Warfare Center" },
+        { category: "NRW", sanction: 600, borne: 500, colorStart: "#FFFFFF", colorEnd: "#F5F5F5", label: "Navigation Repair Workshop" },
+        { category: "SPV", sanction: 800, borne: 650, colorStart: "#FF6347", colorEnd: "#B22222", label: "Special Project Vessel" },
+
+        // { category: "SSS", sanction: 1500, borne: 1300, colorStart: "#FFD700", colorEnd: "#FFA500", label: "Support Services Squadron" },
+        // { category: "GOI", sanction: 1800, borne: 1600, colorStart: "#1E90FF", colorEnd: "#0000CD", label: "General Operations Infantry" },
       ],
       bar: [
-        { month: "Jan", I: 50, M: 30, label: "January 2025" },
-        { month: "Feb", I: 60, M: 35, label: "February 2025" },
-        { month: "Mar", I: 70, M: 40, label: "March 2025" },
-        { month: "Apr", I: 80, M: 45, label: "April 2025" },
-        { month: "May", I: 90, M: 50, label: "May 2025" },
-        { month: "Jun", I: 100, M: 55, label: "June 2025" },
-        { month: "Jul", I: 110, M: 60, label: "July 2025" },
-        { month: "Aug", I: 120, M: 65, label: "August 2025" },
-        { month: "Sep", I: 130, M: 70, label: "September 2025" },
-        { month: "Oct", I: 140, M: 75, label: "October 2025" },
-        { month: "Nov", I: 150, M: 80, label: "November 2025" },
-        { month: "Dec", I: 160, M: 85, label: "December 2025" },
-      ],
+        { category: "2018", Industrial: 40, NonIndustrial: 25 },
+        { category: "2019", Industrial: 55, NonIndustrial: 30 },
+        { category: "2020", Industrial: 60, NonIndustrial: 45 },
+        { category: "2021", Industrial: 70, NonIndustrial: 50 },
+        { category: "2022", Industrial: 65, NonIndustrial: 40 },
+        { category: "2023", Industrial: 75, NonIndustrial: 55 },
+      ]
     });
   }, []);
 
@@ -175,19 +170,19 @@ export default function Dashboard() {
             theme === "dark" ? "text-white" : "text-gray-900"
           }`}
         >
-          Admin Dashboard
+          ND(V) Dashboard
         </h4>
       </div>
 
-      <div className="gap-6">
+      <div className="gap-4">
         {/* Main Dashboard Content */}
-        <div className="lg:col-span-9 space-y-6">
+        <div className="lg:col-span-9 space-y-4">
           {/* Stats Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            <StatsCard icon={Users} label="Employees" value="700" color="blue" percent={70} />
-            <StatsCard icon={Building} label="Companies" value="30" color="yellow" percent={30} />
-            <StatsCard icon={Briefcase} label="Leaves" value="3" color="red" percent={3} />
-            <StatsCard icon={DollarSign} label="Salary" value="$5.8M" color="green" percent={58} />
+            <StatsCard background={'#2b7fff'} icon={Users} label="Sanction" value="7000" bgcolor={'#133b78'} percent={70} />
+            <StatsCard background={'#f0b100'} icon={Building} label="Borne" value="5400" bgcolor={'#765e1a'} percent={30} />
+            <StatsCard background={'#f4444d'} icon={Briefcase} label="Deficency" value="1600" bgcolor={'#60161a'} percent={3} />
+            <StatsCard background={'#269156'} icon={DollarSign} label="Deficency Percentage" value="22.8%" bgcolor={'#124c2c'} percent={58} />
           </div>
 
           {/* Charts */}
@@ -197,23 +192,31 @@ export default function Dashboard() {
                 title="Sanction Overview"
                 chartType="pie"
                 chartData={chartData.pie}
-                selectOptions={["This Year", "Last Year", "All Time"]}
+                selectOptions={["This Year", "Last Year", "All Time", '2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012', '2011', '2010']}
                 height={600} // Increased height to 600px for larger pie chart
               />
             )}
             {chartData.bar && (
               <ChartCard
-                title="Monthly Metrics"
-                chartType="bar"
-                chartData={chartData.bar}
-                selectOptions={["2025", "2024", "2023"]}
-                height={600}
-              />
+              title="Industrial vs Non-Industrial Over Years"
+              chartType="clustered-bar"
+              chartData={[
+                { category: "2018", Industrial: 40, NonIndustrial: 25 },
+                { category: "2019", Industrial: 55, NonIndustrial: 30 },
+                { category: "2020", Industrial: 60, NonIndustrial: 45 },
+                { category: "2021", Industrial: 70, NonIndustrial: 50 },
+                { category: "2022", Industrial: 65, NonIndustrial: 40 },
+                { category: "2023", Industrial: 75, NonIndustrial: 55 },
+              ]}
+              selectOptions={["This Year", "Last Year", "All Time", '2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012', '2011', '2010']}
+              height={600}
+              theme="dark" // or "light"
+            />
             )}
           </div>
 
           {/* Tables Section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
             {/* Trade Wise Section */}
             <div
               className={`p-6 rounded-xl ${
@@ -476,7 +479,7 @@ export default function Dashboard() {
                       </PopoverContent>
                     </Popover>
                   </div>
-                  <div className="overflow-x-auto">
+                  <div className="overflow-x-auto pt-2">
                     <Table
                       className={`w-full ${
                         theme === "dark" ? "border-gray-700 shadow-md hover:shadow-lg rounded-lg" : "border-gray-200"

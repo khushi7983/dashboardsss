@@ -1,6 +1,6 @@
 // Importing React and necessary components
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Dashboard from "./components/dashboard/Dashboard";
+import DashboardNDV from "./components/dashboard/DashboardNDV";
 import DashboardSidebar from "./components/dashboard/DashboardSidebar"; // Default import
 import { SidebarWrapper } from "./components/dashboard/DashboardSidebar"; // Named import
 import { useSidebar } from "@/components/ui/sidebar"; // Ensure this is the correct path
@@ -8,6 +8,8 @@ import "./index.css";
 import Header from "./components/dashboard/Header";
 import ThemeProvider from "./components/dashboard/ThemeProvider";
 import Hierarchy from "./components/dashboard/Hierarchy";
+import DashboardASD from './components/dashboard/DashboardASD';
+import DashboardHr from './components/dashboard/DashboardHr';
 
 function DashboardLayout() {
   const { toggleSidebar } = useSidebar(); // This works because it's wrapped in SidebarProvider
@@ -20,7 +22,9 @@ function DashboardLayout() {
         <main className="flex-1 w-full pt-[70px] overflow-auto bg-inherit">
   <div className="w-full h-full">
     <Routes>
-      <Route path="/" element={<Dashboard />} />
+      <Route path="/" element={<DashboardASD />} />
+      <Route path="/nvd_dashboard" element={<DashboardNDV />} />
+      <Route path="/hr_dashboard" element={<DashboardHr />} />
       <Route path="/hierarchy" element={<Hierarchy />} />
     </Routes>
   </div>

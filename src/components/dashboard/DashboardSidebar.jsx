@@ -33,20 +33,20 @@ export default function DashboardSidebar() {
       icon: Building,
       label: "Allied Units",
       subItems: [
-        { label: "OWC", route: "/" }, // Example routes; adjust as needed
-        { label: "AOB", route: "/" },
-        { label: "NRW", route: "/" },
-        { label: "SPV", route: "/" }
+        { label: "OWC", route: "/owc" },
+        { label: "AOB", route: "/aob" },
+        { label: "NRW", route: "/nrw" },
+        { label: "SPV", route: "/spv" }
       ]
     },
     { icon: Building, label: "Hierarchy", route: "/hierarchy" },
-    { icon: Building, label: "Company", route: "/" },
-    { icon: Calendar, label: "Calendar", route: "/" },
-    { icon: Briefcase, label: "Leave", route: "/" },
-    { icon: Star, label: "Review", route: "/" },
-    { icon: FileText, label: "Report", route: "/" },
-    { icon: FileCog, label: "Manage", route: "/" },
-    { icon: SlidersHorizontal, label: "Settings", route: "/" }
+    { icon: Building, label: "Company", route: "/company" },
+    { icon: Calendar, label: "Calendar", route: "/calendar" },
+    { icon: Briefcase, label: "Leave", route: "/leave" },
+    { icon: Star, label: "Review", route: "/review" },
+    { icon: FileText, label: "Report", route: "/report" },
+    { icon: FileCog, label: "Manage", route: "/manage" },
+    { icon: SlidersHorizontal, label: "Settings", route: "/settings" }
   ];
 
   const menuItemVariants = {

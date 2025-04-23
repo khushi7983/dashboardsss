@@ -5,7 +5,7 @@ export default function StatsCard({ icon: Icon, label, value, bgcolor, percent, 
 
   const cardStyle = {
     background: background,
-    borderColor: "#e2e8f0",
+    // borderColor: "#e2e8f0",
     boxShadow: "0 6px 12px -2px rgba(0, 0, 0, 0.15), 0 3px 6px -2px rgba(0, 0, 0, 0.1)",
   };
 

@@ -219,7 +219,7 @@ export default function DashboardASD() {
           {/* Stats Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <StatsCard
-              background={theme === "dark" ? "#1a5cd1" : "#b3d4ff"}
+              background={theme === "dark" ? "#2b7fff" : "#b3d4ff"}
               icon={Users}
               label="Sanction"
               value="7000"
@@ -227,7 +227,7 @@ export default function DashboardASD() {
               percent={70}
             />
             <StatsCard
-              background={theme === "dark" ? "#cc8e00" : "#ffe8b3"}
+              background={theme === "dark" ? "#f0b100" : "#ffe8b3"}
               icon={Building}
               label="Borne"
               value="5400"
@@ -235,15 +235,15 @@ export default function DashboardASD() {
               percent={30}
             />
             <StatsCard
-              background={theme === "dark" ? "#c5303a" : "#ffc1cc"}
+              background={theme === "dark" ? "#f4444d" : "#ffc1cc"}
               icon={Briefcase}
               label="Deficency"
               value="1600"
-              bgcolor={theme === "dark" ? "#60116a" : "#f87171"}
+              bgcolor={theme === "dark" ? "#60161a" : "#f87171"}
               percent={3}
             />
             <StatsCard
-              background={theme === "dark" ? "#1c6b3e" : "#b7f5d1"}
+              background={theme === "dark" ? "#269156" : "#b7f5d1"}
               icon={DollarSign}
               label="Deficency Percentage"
               value="22.3%"

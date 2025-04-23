@@ -218,39 +218,39 @@ export default function DashboardNDV() {
         <div className="lg:col-span-9 space-y-4">
           {/* Stats Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            <StatsCard
-              background={theme === "dark" ? "#1a5cd1" : "#b3d4ff"}
-              icon={Users}
-              label="Sanction"
-              value="6000"
-              bgcolor={theme === "dark" ? "#133b78" : "#4b83f6"}
-              percent={73}
-            />
-            <StatsCard
-              background={theme === "dark" ? "#cc8e00" : "#ffe8b3"}
-              icon={Building}
-              label="Borne"
-              value="4400"
-              bgcolor={theme === "dark" ? "#765e1a" : "#f4a261"}
-              percent={27}
-            />
-            <StatsCard
-              background={theme === "dark" ? "#c5303a" : "#ffc1cc"}
-              icon={Briefcase}
-              label="Deficiency"
-              value="1200"
-              bgcolor={theme === "dark" ? "#60116a" : "#f87171"}
-              percent={4}
-            />
-            <StatsCard
-              background={theme === "dark" ? "#1c6b3e" : "#b7f5d1"}
-              icon={DollarSign}
-              label="Deficiency Percentage"
-              value="27.3%"
-              bgcolor={theme === "dark" ? "#124c2c" : "#34d399"}
-              percent={60}
-            />
-          </div>
+                      <StatsCard
+                        background={theme === "dark" ? "#2b7fff" : "#b3d4ff"}
+                        icon={Users}
+                        label="Sanction"
+                        value="6000"
+                        bgcolor={theme === "dark" ? "#133b78" : "#4b83f6"}
+                        percent={70}
+                      />
+                      <StatsCard
+                        background={theme === "dark" ? "#f0b100" : "#ffe8b3"}
+                        icon={Building}
+                        label="Borne"
+                        value="4400"
+                        bgcolor={theme === "dark" ? "#765e1a" : "#f4a261"}
+                        percent={30}
+                      />
+                      <StatsCard
+                        background={theme === "dark" ? "#f4444d" : "#ffc1cc"}
+                        icon={Briefcase}
+                        label="Deficency"
+                        value="1200"
+                        bgcolor={theme === "dark" ? "#60161a" : "#f87171"}
+                        percent={3}
+                      />
+                      <StatsCard
+                        background={theme === "dark" ? "#269156" : "#b7f5d1"}
+                        icon={DollarSign}
+                        label="Deficency Percentage"
+                        value="27.3%"
+                        bgcolor={theme === "dark" ? "#124c2c" : "#34d399"}
+                        percent={58}
+                      />
+                    </div>
 
           {/* Charts */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 min-h-[600px]">

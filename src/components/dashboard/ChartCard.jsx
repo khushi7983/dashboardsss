@@ -9,9 +9,9 @@ import { useTheme } from "./ThemeProvider";
 // Apply animated theme for smooth transitions
 am4core.useTheme(am4themes_animated);
 
-// Predefined color palettes for better distinction
+// Enhanced color palettes for better distinction in both themes
 const colorPalettes = {
-  vibrant: [
+  dark: [
     { colorStart: "#FF5252", colorEnd: "#FF1744" }, // Red
     { colorStart: "#448AFF", colorEnd: "#2979FF" }, // Blue
     { colorStart: "#FFAB40", colorEnd: "#FF9100" }, // Orange
@@ -25,25 +25,25 @@ const colorPalettes = {
     { colorStart: "#A7FFEB", colorEnd: "#64FFDA" }, // Teal
     { colorStart: "#CCFF90", colorEnd: "#B2FF59" }  // Light Green
   ],
-  pastel: [
-    { colorStart: "#FFCDD2", colorEnd: "#EF9A9A" }, // Pastel Red
-    { colorStart: "#BBDEFB", colorEnd: "#90CAF9" }, // Pastel Blue
-    { colorStart: "#FFE0B2", colorEnd: "#FFCC80" }, // Pastel Orange
-    { colorStart: "#C8E6C9", colorEnd: "#A5D6A7" }, // Pastel Green
-    { colorStart: "#D1C4E9", colorEnd: "#B39DDB" }, // Pastel Purple
-    { colorStart: "#F8BBD0", colorEnd: "#F48FB1" }, // Pastel Pink
-    { colorStart: "#B2EBF2", colorEnd: "#80DEEA" }, // Pastel Cyan
-    { colorStart: "#FFF9C4", colorEnd: "#FFF59D" }, // Pastel Yellow
-    { colorStart: "#E1BEE7", colorEnd: "#CE93D8" }, // Pastel Magenta
-    { colorStart: "#B3E5FC", colorEnd: "#81D4FA" }, // Pastel Light Blue
-    { colorStart: "#B2DFDB", colorEnd: "#80CBC4" }, // Pastel Teal
-    { colorStart: "#DCEDC8", colorEnd: "#C5E1A5" }  // Pastel Light Green
+  light: [
+    { colorStart: "#F44336", colorEnd: "#D32F2F" }, // Light mode Red
+    { colorStart: "#2196F3", colorEnd: "#1976D2" }, // Light mode Blue
+    { colorStart: "#FF9800", colorEnd: "#F57C00" }, // Light mode Orange
+    { colorStart: "#4CAF50", colorEnd: "#388E3C" }, // Light mode Green
+    { colorStart: "#673AB7", colorEnd: "#512DA8" }, // Light mode Purple
+    { colorStart: "#E91E63", colorEnd: "#C2185B" }, // Light mode Pink
+    { colorStart: "#00BCD4", colorEnd: "#0097A7" }, // Light mode Cyan
+    { colorStart: "#FFEB3B", colorEnd: "#FBC02D" }, // Light mode Yellow
+    { colorStart: "#9C27B0", colorEnd: "#7B1FA2" }, // Light mode Magenta
+    { colorStart: "#03A9F4", colorEnd: "#0288D1" }, // Light mode Light Blue
+    { colorStart: "#009688", colorEnd: "#00796B" }, // Light mode Teal
+    { colorStart: "#8BC34A", colorEnd: "#689F38" }  // Light mode Light Green
   ]
 };
 
 // Function to generate distinct colors
 function getDistinctColors(count, theme) {
-  const palette = theme === "dark" ? colorPalettes.vibrant : colorPalettes.pastel;
+  const palette = theme === "dark" ? colorPalettes.dark : colorPalettes.light;
   const colors = [];
   
   // If we need more colors than in the palette, we'll need to generate some
@@ -137,15 +137,33 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
       series.dataFields.value = "sanction";
       series.dataFields.category = "category";
       
-      // REMOVED: Disable external labels completely
+      // FIX: Re-enable labels but position them for better readability
+      series.alignLabels = false; // Don't try to align labels in straight lines
+      series.labels.template.radius = 10; // Distance from slice to label
+      series.labels.template.fill = am4core.color(theme === "dark" ? "#FFFFFF" : "#333333");
+      series.labels.template.relativeRotation = 0; // Keep labels horizontal
+      series.labels.template.text = "{category}: {value.percent.formatNumber('#.0')}%";
+      series.labels.template.fontSize = 11;
+      series.labels.template.fontWeight = "500";
+      series.labels.template.maxWidth = 80;
+      series.labels.template.wrap = true; // Enable text wrapping for longer labels
+      series.labels.template.background.fill = am4core.color(theme === "dark" ? "rgba(31,41,55,0.7)" : "rgba(255,255,255,0.7)");
+      series.labels.template.padding(5, 7, 5, 7);
+      series.labels.template.background.cornerRadius = 3;
       series.labels.template.disabled = true;
-      series.ticks.template.disabled = true;
+  series.ticks.template.disabled = true;
+      
+      // Add line connecting the slice to its label
+      series.ticks.template.strokeOpacity = 0.6;
+      series.ticks.template.stroke = am4core.color(theme === "dark" ? "#D1D5DB" : "#6B7280");
+      series.ticks.template.strokeWidth = 1;
+      series.ticks.template.length = 10;
       
       // Enhanced slices styling
       series.slices.template.cornerRadius = 8;
       series.slices.template.innerCornerRadius = 5;
       
-      // REMOVED: Remove the black border of pie chart slices
+      // FIXED: Remove the black border of pie chart slices
       series.slices.template.stroke = am4core.color("rgba(0,0,0,0)");
       series.slices.template.strokeWidth = 0;
       series.slices.template.strokeOpacity = 0;
@@ -184,7 +202,7 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
       tooltip.background.strokeWidth = 2;
       tooltip.background.cornerRadius = 8;
       tooltip.label.fill = am4core.color(theme === "dark" ? "#FFFFFF" : "#1F2937");
-      tooltip.padding(12, 15, 12, 15);
+      tooltip.padding();
       tooltip.pointerOrientation = "vertical";
       tooltip.label.fontSize = 13;
       tooltip.label.fontWeight = "500";
@@ -197,18 +215,21 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
       tooltip.boxShadow.opacity = 0.2;
       tooltip.zIndex = 1000;
       tooltip.animationDuration = 400;
-      // Enhanced legend
+      
+      // Enhanced legend with better spacing and layout
       chart.legend = new am4charts.Legend();
       chart.legend.position = "bottom";
       chart.legend.contentAlign = "center";
-      chart.legend.layout = "horizontal"; // Ensure legend items are displayed in a single row
+      chart.legend.layout = "grid"; // Change to grid layout for better organization
+      chart.legend.maxHeight = undefined; // Don't restrict height
+      chart.legend.maxWidth = undefined; // Don't restrict width
       
       // Fix truncated labels in legend
       chart.legend.labels.template.truncate = false;
       chart.legend.labels.template.wrap = true;
-      chart.legend.labels.template.maxWidth = 150;
+      chart.legend.labels.template.maxWidth = 120;
       chart.legend.itemContainers.template.paddingTop = 5;
-      chart.legend.itemContainers.template.paddingBottom = 25;
+      chart.legend.itemContainers.template.paddingBottom = 5;
       chart.legend.useDefaultMarker = false;
       
       // Custom legend markers
@@ -223,8 +244,8 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
       
       // Improve legend labels styling
       chart.legend.labels.template.fill = am4core.color(theme === "dark" ? "#FFFFFF" : "#333333");
-      chart.legend.labels.template.fontSize = 14;
-      chart.legend.valueLabels.template.fontSize = 14;
+      chart.legend.labels.template.fontSize = 12;
+      chart.legend.valueLabels.template.fontSize = 11;
       chart.legend.valueLabels.template.fill = am4core.color(theme === "dark" ? "#D1D5DB" : "#4B5563");
       
       // Add more space between legend items
@@ -235,14 +256,11 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
       // Add value to legend labels
       chart.legend.valueLabels.template.text = "{value.percent.formatNumber('#.#')}%";
       
-      // Adjust chart padding 
-      chart.paddingRight = 25;
-      chart.legend.marginLeft = 15;
-
-      // Ensure legend utilizes only required space
-      chart.legend.itemContainers.template.width = am4core.percent(100);
-      chart.legend.itemContainers.template.maxWidth = undefined;
-      chart.legend.itemContainers.template.minWidth = undefined;
+      // Create vertical layout space for chart and legend
+      chart.paddingBottom = 10;
+      chart.paddingTop = 10;
+      chart.paddingLeft = 10;
+      chart.paddingRight = 10;
       
     } else if (chartType === "bar") {
       chart.data = chartData;
@@ -277,7 +295,7 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
       yAxis.title.fontWeight = "bold";
       yAxis.title.marginRight = 10;
 
-      // Enhanced first series with better visuals
+      // Enhanced first series with better visuals for both themes
       let series1 = chart.series.push(new am4charts.ColumnSeries3D());
       series1.dataFields.valueY = "I";
       series1.dataFields.categoryX = "month";
@@ -289,12 +307,17 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
       series1.columns.template.width = am4core.percent(70);
       series1.columns.template.animationDuration = 600;
       
-      // Enhanced gradient for better visibility
+      // Enhanced gradient for better visibility in both themes
       series1.columns.template.adapter.add("fill", () => {
         let gradient = new am4core.LinearGradient();
         gradient.rotation = 90;
-        gradient.addColor(am4core.color(theme === "dark" ? "#60A5FA" : "#3B82F6"));
-        gradient.addColor(am4core.color(theme === "dark" ? "#2563EB" : "#1D4ED8"));
+        if (theme === "dark") {
+          gradient.addColor(am4core.color("#60A5FA"));
+          gradient.addColor(am4core.color("#2563EB"));
+        } else {
+          gradient.addColor(am4core.color("#3B82F6"));
+          gradient.addColor(am4core.color("#1D4ED8"));
+        }
         return gradient;
       });
       
@@ -307,7 +330,7 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
       hoverState1.properties.fillOpacity = 1;
       hoverState1.properties.scale = 1.1;
 
-      // Enhanced second series with better visuals
+      // Enhanced second series with better visuals for both themes
       let series2 = chart.series.push(new am4charts.ColumnSeries3D());
       series2.dataFields.valueY = "M";
       series2.dataFields.categoryX = "month";
@@ -319,12 +342,17 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
       series2.columns.template.showOnInit = true;
       series2.columns.template.animationDuration = 600;
       
-      // Enhanced gradient for better visibility
+      // Enhanced gradient for better visibility in both themes
       series2.columns.template.adapter.add("fill", () => {
         let gradient = new am4core.LinearGradient();
         gradient.rotation = 90;
-        gradient.addColor(am4core.color(theme === "dark" ? "#F3F4F6" : "#D1D5DB"));
-        gradient.addColor(am4core.color(theme === "dark" ? "#D1D5DB" : "#9CA3AF"));
+        if (theme === "dark") {
+          gradient.addColor(am4core.color("#F3F4F6"));
+          gradient.addColor(am4core.color("#D1D5DB"));
+        } else {
+          gradient.addColor(am4core.color("#9CA3AF"));
+          gradient.addColor(am4core.color("#6B7280"));
+        }
         return gradient;
       });
       
@@ -376,20 +404,22 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
       xAxis.renderer.grid.template.location = 0;
       xAxis.renderer.labels.template.fill = am4core.color(theme === "dark" ? "#FFFFFF" : "#333333");
       xAxis.renderer.labels.template.fontWeight = "bold";
-      xAxis.renderer.grid.template.stroke = am4core.color(theme === "dark" ? "#FFD700" : "#FFA500");
+      // Improved axis colors for light theme
+      xAxis.renderer.grid.template.stroke = am4core.color(theme === "dark" ? "#4B5563" : "#D1D5DB");
       xAxis.renderer.labels.template.fontSize = 12;
       xAxis.renderer.cellStartLocation = 0.1;
       xAxis.renderer.cellEndLocation = 0.9;
       xAxis.title.text = "Categories";
-      xAxis.title.fill = am4core.color(theme === "dark" ? "#D1D5DB" : "#FFD700");
+      xAxis.title.fill = am4core.color(theme === "dark" ? "#D1D5DB" : "#6B7280");
     
       let yAxis = chart.yAxes.push(new am4charts.ValueAxis());
       yAxis.min = 0;
       yAxis.renderer.labels.template.fill = am4core.color(theme === "dark" ? "#FFFFFF" : "#333333");
-      yAxis.renderer.grid.template.stroke = am4core.color(theme === "dark" ? "#FFD700" : "#FFA500");
+      // Improved axis colors for light theme
+      yAxis.renderer.grid.template.stroke = am4core.color(theme === "dark" ? "#4B5563" : "#D1D5DB");
       yAxis.renderer.grid.template.strokeOpacity = 0.3;
       yAxis.title.text = "Values";
-      yAxis.title.fill = am4core.color(theme === "dark" ? "#D1D5DB" : "#FFD700");
+      yAxis.title.fill = am4core.color(theme === "dark" ? "#D1D5DB" : "#6B7280");
     
       // Create multiple series based on keys
       const keys = Object.keys(chartData[0]).filter(k => k !== "category");
@@ -420,10 +450,17 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
         hoverState.properties.scale = 1.05;
       });
     
+      // Enhanced legend with better styling
       chart.legend = new am4charts.Legend();
       chart.legend.position = "top";
       chart.legend.contentAlign = "center";
+      chart.legend.paddingTop = 15;
+      chart.legend.paddingBottom = 15;
       chart.legend.labels.template.fill = am4core.color(theme === "dark" ? "#FFFFFF" : "#333333");
+      chart.legend.labels.template.fontSize = 13;
+      chart.legend.useDefaultMarker = true;
+      chart.legend.markers.template.width = 15;
+      chart.legend.markers.template.height = 15;
     }
     
     chartInstance.current = chart;
@@ -439,21 +476,23 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
     <Card className={`${
       theme === "dark" ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"
     } shadow-lg hover:shadow-xl rounded-lg overflow-hidden transition-all duration-300`}>
-      <CardHeader className="flex flex-row items-center justify-between border-b border-opacity-50 border-gray-200">
-        <CardTitle className={`text-[40] font-semibold ${
-          theme === "dark" ? "text-blue-200" : "text-blue-300"
+      <CardHeader className={`flex flex-row items-center justify-between border-b border-opacity-50 ${
+        theme === "dark" ? "border-gray-700" : "border-gray-200"
+      }`}>
+        <CardTitle className={`text-xl font-semibold ${
+          theme === "dark" ? "text-white" : "text-gray-800"
         }`}>{title}</CardTitle>
         {selectOptions && (
           <Select defaultValue={selectOptions[0]}>
             <SelectTrigger className={`w-[150px] ${
               theme === "dark"
                 ? "bg-gray-700 text-gray-200 border-gray-600"
-                : "bg-gray-50 text-gray-900 border-gray-300"
-            } rounded-md text-sm font-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200`}>
+                : "bg-gray-50 text-gray-800 border-gray-300"
+            } rounded-md text-sm font-medium focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200`}>
               <SelectValue placeholder={selectOptions[0]} />
             </SelectTrigger>
             <SelectContent className={`${
-              theme === "dark" ? "bg-gray-700 text-gray-200 border-gray-600" : "bg-white text-gray-900 border-gray-200"
+              theme === "dark" ? "bg-gray-700 text-gray-200 border-gray-600" : "bg-white text-gray-800 border-gray-300"
             } rounded-md shadow-lg z-50`}>
               {selectOptions.map((option, index) => (
                 <SelectItem
@@ -470,9 +509,9 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
           </Select>
         )}
       </CardHeader>
-      <CardContent className="px-5 py-5">
+      <CardContent className={`px-5 py-5 ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}>
         <div 
-          className="w-full overflow-visible" 
+          className="w-full overflow-visible rounded-md" 
           style={{ position: 'relative', zIndex: 10, height: `${height}px` }} 
           ref={chartRef} 
         />

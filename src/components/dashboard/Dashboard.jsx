@@ -178,12 +178,41 @@ export default function Dashboard() {
         {/* Main Dashboard Content */}
         <div className="lg:col-span-9 space-y-4">
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            <StatsCard background={'#2b7fff'} icon={Users} label="Sanction" value="7000" bgcolor={'#133b78'} percent={70} />
-            <StatsCard background={'#f0b100'} icon={Building} label="Borne" value="5400" bgcolor={'#765e1a'} percent={30} />
-            <StatsCard background={'#f4444d'} icon={Briefcase} label="Deficency" value="1600" bgcolor={'#60161a'} percent={3} />
-            <StatsCard background={'#269156'} icon={DollarSign} label="Deficency Percentage" value="22.8%" bgcolor={'#124c2c'} percent={58} />
-          </div>
+          // Update StatsCard implementations in the Stats Cards section
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+  <StatsCard 
+    background={theme === "dark" ? '#2b7fff' : '#e0edff'} 
+    icon={Users} 
+    label="Sanction" 
+    value="7000" 
+    bgcolor={theme === "dark" ? '#133b78' : '#1a56db'} 
+    percent={70} 
+  />
+  <StatsCard 
+    background={theme === "dark" ? '#f0b100' : '#fff8e6'} 
+    icon={Building} 
+    label="Borne" 
+    value="5400" 
+    bgcolor={theme === "dark" ? '#765e1a' : '#d97706'} 
+    percent={30} 
+  />
+  <StatsCard 
+    background={theme === "dark" ? '#f4444d' : '#fee2e2'} 
+    icon={Briefcase} 
+    label="Deficency" 
+    value="1600" 
+    bgcolor={theme === "dark" ? '#60161a' : '#dc2626'} 
+    percent={3} 
+  />
+  <StatsCard 
+    background={theme === "dark" ? '#269156' : '#ecfdf5'} 
+    icon={DollarSign} 
+    label="Deficency Percentage" 
+    value="22.8%" 
+    bgcolor={theme === "dark" ? '#124c2c' : '#059669'} 
+    percent={58} 
+  />
+</div>
 
           {/* Charts */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 min-h-[600px]">

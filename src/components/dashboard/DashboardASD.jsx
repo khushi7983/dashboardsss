@@ -75,19 +75,22 @@ export default function DashboardASD() {
   ];
 
   const awardsData = [
-    { type: "Excellence", trade: "TA+", count: 12, below35: 5, age35to45: 4, above45: 3, date: "2025-01-05" },
-    { type: "Innovation", trade: "FM", count: 8, below35: 3, age35to45: 3, above45: 2, date: "2025-02-10" },
-    { type: "Leadership", trade: "CM", count: 10, below35: 4, age35to45: 4, above45: 2, date: "2025-03-05" },
-    { type: "Teamwork", trade: "HSK I", count: 6, below35: 2, age35to45: 2, above45: 2, date: "2025-01-15" },
-    { type: "Excellence", trade: "HSK II", count: 7, below35: 3, age35to45: 2, above45: 2, date: "2025-02-20" },
-    { type: "Innovation", trade: "SK", count: 9, below35: 4, age35to45: 3, above45: 2, date: "2025-03-10" },
-    { type: "Leadership", trade: "TMM", count: 8, below35: 3, age35to45: 3, above45: 2, date: "2025-04-01" },
+    { type: "ASD Cash", count: 12, below35: 5, age35to45: 4, above45: 3, date: "2025-01-05" },
+    { type: "CNC Cash", count: 8, below35: 3, age35to45: 3, above45: 2, date: "2025-02-10" },
+    { type: "CNC Commendation", count: 10, below35: 4, age35to45: 4, above45: 2, date: "2025-03-05" },
+    { type: "CNS Cash", count: 6, below35: 2, age35to45: 2, above45: 2, date: "2025-01-15" },
+    { type: "CNS Commendation", count: 7, below35: 3, age35to45: 2, above45: 2, date: "2025-02-20" },
+    { type: "SHRAM Awards", count: 9, below35: 4, age35to45: 3, above45: 2, date: "2025-03-10" },
   ];
 
   const trades = ["All", "TA+", "FM", "CM", "HSK I", "HSK II", "SK", "TMM"];
   const ageOptions = ["All", "Below 35", "35-45", "Above 45"];
   const healthStatuses = ["All", "Medical Pending", "HT", "DIAB", "HT + DIAB"];
-  const awardTypes = ["All", "Excellence", "Innovation", "Leadership", "Teamwork"];
+  const awardTypes = ["All", "ASD Cash", "CNC Cash",
+    "CNC Commendation",
+    "CNS Cash",
+    "CNS Commendation",
+    "SHRAM Awards"];
 
   useEffect(() => {
     setChartData({
@@ -178,11 +181,10 @@ export default function DashboardASD() {
 
   return (
     <div
-      className={`px-10 py-8 w-[calc(100vw-256px)] ${
-        theme === "dark"
+      className={`px-10 py-8 w-[calc(100vw-256px)] ${theme === "dark"
           ? "bg-gradient-to-br from-gray-900 to-gray-800 text-white"
           : "bg-gray-50 text-gray-900"
-      } min-h-screen overflow-x-auto`}
+        } min-h-screen overflow-x-auto`}
     >
       {/* Breadcrumb */}
       <nav className="mb-6">
@@ -190,9 +192,8 @@ export default function DashboardASD() {
           <li className="flex items-center">
             <a
               href="#"
-              className={`${
-                theme === "dark" ? "text-blue-400 hover:text-blue-300" : "text-blue-600 hover:text-blue-700"
-              } transition-colors`}
+              className={`${theme === "dark" ? "text-blue-400 hover:text-blue-300" : "text-blue-600 hover:text-blue-700"
+                } transition-colors`}
             >
               Home
             </a>
@@ -205,9 +206,8 @@ export default function DashboardASD() {
       {/* Page Header */}
       <div className="mb-8">
         <h4
-          className={`text-3xl font-bold tracking-tight ${
-            theme === "dark" ? "text-white" : "text-gray-900"
-          }`}
+          className={`text-3xl font-bold tracking-tight ${theme === "dark" ? "text-white" : "text-gray-900"
+            }`}
         >
           ASD Dashboard
         </h4>
@@ -251,11 +251,9 @@ export default function DashboardASD() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
             {/* Trade Wise Section */}
             <div
-              className={`p-6 rounded-xl ${
-                theme === "dark" ? "bg-gray-800" : "bg-white"
-              } shadow-lg hover:shadow-xl transition-all duration-300 border ${
-                theme === "dark" ? "border-gray-700" : "border-gray-200"
-              }`}
+              className={`p-6 rounded-xl ${theme === "dark" ? "bg-gray-800" : "bg-white"
+                } shadow-lg hover:shadow-xl transition-all duration-300 border ${theme === "dark" ? "border-gray-700" : "border-gray-200"
+                }`}
             >
               <h5 className="text-xl font-semibold mb-4">Trade Wise</h5>
               <div className="flex flex-wrap gap-4 mb-6">
@@ -264,9 +262,8 @@ export default function DashboardASD() {
                   onValueChange={(value) => setTradeFilters({ ...tradeFilters, trade: value })}
                 >
                   <SelectTrigger
-                    className={`w-[200px] ${
-                      theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
-                    }`}
+                    className={`w-[200px] ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
+                      }`}
                   >
                     <SelectValue placeholder="Select Trade" />
                   </SelectTrigger>
@@ -283,9 +280,8 @@ export default function DashboardASD() {
                   onValueChange={(value) => setTradeFilters({ ...tradeFilters, age: value })}
                 >
                   <SelectTrigger
-                    className={`w-[150px] ${
-                      theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
-                    }`}
+                    className={`w-[150px] ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
+                      }`}
                   >
                     <SelectValue placeholder="Select Age" />
                   </SelectTrigger>
@@ -310,15 +306,13 @@ export default function DashboardASD() {
               </div>
               <div className="overflow-x-auto">
                 <Table
-                  className={`w-full ${
-                    theme === "dark" ? "border-gray-700" : "border-gray-200"
-                  } rounded-lg overflow-hidden`}
+                  className={`w-full ${theme === "dark" ? "border-gray-700" : "border-gray-200"
+                    } rounded-lg overflow-hidden`}
                 >
                   <TableHeader>
                     <TableRow
-                      className={`${
-                        theme === "dark" ? "bg-gray-700 hover:bg-gray-600" : "bg-gray-100"
-                      }`}
+                      className={`${theme === "dark" ? "bg-gray-700 hover:bg-gray-600" : "bg-gray-100"
+                        }`}
                     >
                       <TableHead className="font-semibold">Trade</TableHead>
                       <TableHead className="font-semibold">Date</TableHead>
@@ -355,11 +349,9 @@ export default function DashboardASD() {
 
             {/* Transfer Retirement Resignation Death Section */}
             <div
-              className={`p-6 rounded-xl ${
-                theme === "dark" ? "bg-gray-800" : "bg-white"
-              } shadow-lg hover:shadow-xl transition-all duration-300 border ${
-                theme === "dark" ? "border-gray-700" : "border-gray-200"
-              }`}
+              className={`p-6 rounded-xl ${theme === "dark" ? "bg-gray-800" : "bg-white"
+                } shadow-lg hover:shadow-xl transition-all duration-300 border ${theme === "dark" ? "border-gray-700" : "border-gray-200"
+                }`}
             >
               <h5 className="text-xl font-semibold mb-4">Transfer Retirement Resignation Death</h5>
               <Tabs defaultValue="Transfer" className="mb-6">
@@ -367,36 +359,32 @@ export default function DashboardASD() {
                   <TabsTrigger
                     value="Transfer"
                     onClick={() => setTrrdFilters({ ...trrdFilters, type: "Transfer" })}
-                    className={`data-[state=active]:bg-blue-600 data-[state=active]:shadow-lg data-[state=active]:text-white transition-all duration-300 ${
-                      theme === "dark" ? "hover:bg-gray-600" : "hover:bg-gray-200"
-                    }`}
+                    className={`data-[state=active]:bg-blue-600 data-[state=active]:shadow-lg data-[state=active]:text-white transition-all duration-300 ${theme === "dark" ? "hover:bg-gray-600" : "hover:bg-gray-200"
+                      }`}
                   >
                     Transfer
                   </TabsTrigger>
                   <TabsTrigger
                     value="Retirement"
                     onClick={() => setTrrdFilters({ ...trrdFilters, type: "Retirement" })}
-                    className={`data-[state=active]:bg-blue-600 data-[state=active]:shadow-lg data-[state=active]:text-white transition-all duration-300 ${
-                      theme === "dark" ? "hover:bg-gray-600" : "hover:bg-gray-200"
-                    }`}
+                    className={`data-[state=active]:bg-blue-600 data-[state=active]:shadow-lg data-[state=active]:text-white transition-all duration-300 ${theme === "dark" ? "hover:bg-gray-600" : "hover:bg-gray-200"
+                      }`}
                   >
                     Retirement
                   </TabsTrigger>
                   <TabsTrigger
                     value="Resignation"
                     onClick={() => setTrrdFilters({ ...trrdFilters, type: "Resignation" })}
-                    className={`data-[state=active]:bg-blue-600 data-[state=active]:shadow-lg data-[state=active]:text-white transition-all duration-300 ${
-                      theme === "dark" ? "hover:bg-gray-600" : "hover:bg-gray-200"
-                    }`}
+                    className={`data-[state=active]:bg-blue-600 data-[state=active]:shadow-lg data-[state=active]:text-white transition-all duration-300 ${theme === "dark" ? "hover:bg-gray-600" : "hover:bg-gray-200"
+                      }`}
                   >
                     Resignation
                   </TabsTrigger>
                   <TabsTrigger
                     value="Death"
                     onClick={() => setTrrdFilters({ ...trrdFilters, type: "Death" })}
-                    className={`data-[state=active]:bg-blue-600 data-[state=active]:shadow-lg data-[state=active]:text-white transition-all duration-300 ${
-                      theme === "dark" ? "hover:bg-gray-600" : "hover:bg-gray-200"
-                    }`}
+                    className={`data-[state=active]:bg-blue-600 data-[state=active]:shadow-lg data-[state=active]:text-white transition-all duration-300 ${theme === "dark" ? "hover:bg-gray-600" : "hover:bg-gray-200"
+                      }`}
                   >
                     Death
                   </TabsTrigger>
@@ -408,9 +396,8 @@ export default function DashboardASD() {
                       onValueChange={(value) => setTrrdFilters({ ...trrdFilters, trade: value })}
                     >
                       <SelectTrigger
-                        className={`w-[200px] ${
-                          theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
-                        }`}
+                        className={`w-[200px] ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
+                          }`}
                       >
                         <SelectValue placeholder="Select Trade" />
                       </SelectTrigger>
@@ -427,9 +414,8 @@ export default function DashboardASD() {
                       onValueChange={(value) => setTrrdFilters({ ...trrdFilters, age: value })}
                     >
                       <SelectTrigger
-                        className={`w-[150px] ${
-                          theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
-                        }`}
+                        className={`w-[150px] ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
+                          }`}
                       >
                         <SelectValue placeholder="Select Age" />
                       </SelectTrigger>
@@ -454,15 +440,13 @@ export default function DashboardASD() {
                   </div>
                   <div className="overflow-x-auto pt-2">
                     <Table
-                      className={`w-full ${
-                        theme === "dark" ? "border-gray-700 shadow-md hover:shadow-lg rounded-lg" : "border-gray-200"
-                      } rounded-lg overflow-hidden`}
+                      className={`w-full ${theme === "dark" ? "border-gray-700 shadow-md hover:shadow-lg rounded-lg" : "border-gray-200"
+                        } rounded-lg overflow-hidden`}
                     >
                       <TableHeader>
                         <TableRow
-                          className={`${
-                            theme === "dark" ? "bg-gray-700 hover:bg-gray-600" : "bg-gray-100"
-                          }`}
+                          className={`${theme === "dark" ? "bg-gray-700 hover:bg-gray-600" : "bg-gray-100"
+                            }`}
                         >
                           <TableHead className="font-semibold">Trade</TableHead>
                           <TableHead className="font-semibold">Date</TableHead>
@@ -501,11 +485,9 @@ export default function DashboardASD() {
 
             {/* Health Wise Section */}
             <div
-              className={`p-6 rounded-xl ${
-                theme === "dark" ? "bg-gray-800" : "bg-white"
-              } shadow-lg hover:shadow-xl transition-all duration-300 border ${
-                theme === "dark" ? "border-gray-700" : "border-gray-200"
-              }`}
+              className={`p-6 rounded-xl ${theme === "dark" ? "bg-gray-800" : "bg-white"
+                } shadow-lg hover:shadow-xl transition-all duration-300 border ${theme === "dark" ? "border-gray-700" : "border-gray-200"
+                }`}
             >
               <h5 className="text-xl font-semibold mb-4">Health Wise</h5>
               <div className="flex flex-wrap gap-4 mb-6">
@@ -514,9 +496,8 @@ export default function DashboardASD() {
                   onValueChange={(value) => setHealthFilters({ ...healthFilters, status: value })}
                 >
                   <SelectTrigger
-                    className={`w-[200px] ${
-                      theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
-                    }`}
+                    className={`w-[200px] ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
+                      }`}
                   >
                     <SelectValue placeholder="Select Status" />
                   </SelectTrigger>
@@ -533,9 +514,8 @@ export default function DashboardASD() {
                   onValueChange={(value) => setHealthFilters({ ...healthFilters, age: value })}
                 >
                   <SelectTrigger
-                    className={`w-[150px] ${
-                      theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
-                    }`}
+                    className={`w-[150px] ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
+                      }`}
                   >
                     <SelectValue placeholder="Select Age" />
                   </SelectTrigger>
@@ -560,15 +540,13 @@ export default function DashboardASD() {
               </div>
               <div className="overflow-x-auto">
                 <Table
-                  className={`w-full ${
-                    theme === "dark" ? "border-gray-700" : "border-gray-200"
-                  } rounded-lg overflow-hidden`}
+                  className={`w-full ${theme === "dark" ? "border-gray-700" : "border-gray-200"
+                    } rounded-lg overflow-hidden`}
                 >
                   <TableHeader>
                     <TableRow
-                      className={`${
-                        theme === "dark" ? "bg-gray-700 hover:bg-gray-600" : "bg-gray-100"
-                      }`}
+                      className={`${theme === "dark" ? "bg-gray-700 hover:bg-gray-600" : "bg-gray-100"
+                        }`}
                     >
                       <TableHead className="font-semibold">Status</TableHead>
                       <TableHead className="font-semibold">Date</TableHead>
@@ -605,11 +583,9 @@ export default function DashboardASD() {
 
             {/* Awards Wise Section */}
             <div
-              className={`p-6 rounded-xl ${
-                theme === "dark" ? "bg-gray-800" : "bg-white"
-              } shadow-lg hover:shadow-xl transition-all duration-300 border ${
-                theme === "dark" ? "border-gray-700" : "border-gray-200"
-              }`}
+              className={`p-6 rounded-xl ${theme === "dark" ? "bg-gray-800" : "bg-white"
+                } shadow-lg hover:shadow-xl transition-all duration-300 border ${theme === "dark" ? "border-gray-700" : "border-gray-200"
+                }`}
             >
               <h5 className="text-xl font-semibold mb-4">Awards Wise</h5>
               <div className="flex flex-wrap gap-4 mb-6">
@@ -618,9 +594,8 @@ export default function DashboardASD() {
                   onValueChange={(value) => setAwardFilters({ ...awardFilters, type: value })}
                 >
                   <SelectTrigger
-                    className={`w-[200px] ${
-                      theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
-                    }`}
+                    className={`w-[150px] ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
+                      }`}
                   >
                     <SelectValue placeholder="Select Award Type" />
                   </SelectTrigger>
@@ -637,9 +612,8 @@ export default function DashboardASD() {
                   onValueChange={(value) => setAwardFilters({ ...awardFilters, trade: value })}
                 >
                   <SelectTrigger
-                    className={`w-[200px] ${
-                      theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
-                    }`}
+                    className={`w-[150px] ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
+                      }`}
                   >
                     <SelectValue placeholder="Select Trade" />
                   </SelectTrigger>
@@ -656,9 +630,8 @@ export default function DashboardASD() {
                   onValueChange={(value) => setAwardFilters({ ...awardFilters, age: value })}
                 >
                   <SelectTrigger
-                    className={`w-[150px] ${
-                      theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
-                    }`}
+                    className={`w-[150px] ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
+                      }`}
                   >
                     <SelectValue placeholder="Select Age" />
                   </SelectTrigger>
@@ -683,23 +656,21 @@ export default function DashboardASD() {
               </div>
               <div className="overflow-x-auto">
                 <Table
-                  className={`w-full ${
-                    theme === "dark" ? "border-gray-700" : "border-gray-200"
-                  } rounded-lg overflow-hidden`}
+                  className={`w-full ${theme === "dark" ? "border-gray-700" : "border-gray-200"
+                    } rounded-lg overflow-hidden`}
                 >
                   <TableHeader>
                     <TableRow
-                      className={`${
-                        theme === "dark" ? "bg-gray-700 hover:bg-gray-600" : "bg-gray-100"
-                      }`}
+                      className={`${theme === "dark" ? "bg-gray-700 hover:bg-gray-600" : "bg-gray-100"
+                        }`}
                     >
                       <TableHead className="font-semibold">Award Type</TableHead>
-                      <TableHead className="font-semibold">Trade</TableHead>
+                      {/* <TableHead className="font-semibold">Trade</TableHead>  */}
                       <TableHead className="font-semibold">Date</TableHead>
                       <TableHead className="font-semibold text-center">Total</TableHead>
-                      <TableHead className="font-semibold text-center">Below 35</TableHead>
+                      {/* <TableHead className="font-semibold text-center">Below 35</TableHead>
                       <TableHead className="font-semibold text-center">35-45</TableHead>
-                      <TableHead className="font-semibold text-center">Above 45</TableHead>
+                      <TableHead className="font-semibold text-center">Above 45</TableHead>  */}
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -714,12 +685,12 @@ export default function DashboardASD() {
                           className={theme === "dark" ? "hover:bg-gray-600" : "hover:bg-gray-200"}
                         >
                           <TableCell className="font-semibold">{item.type}</TableCell>
-                          <TableCell>{item.trade}</TableCell>
+                          {/* <TableCell>{item.trade}</TableCell>  */}
                           <TableCell>{item.date}</TableCell>
                           <TableCell className="text-center">{item.count}</TableCell>
-                          <TableCell className="text-center">{item.below35}</TableCell>
+                          {/* <TableCell className="text-center">{item.below35}</TableCell>
                           <TableCell className="text-center">{item.age35to45}</TableCell>
-                          <TableCell className="text-center">{item.above45}</TableCell>
+                          <TableCell className="text-center">{item.above45}</TableCell> */}
                         </motion.tr>
                       ))}
                     </AnimatePresence>

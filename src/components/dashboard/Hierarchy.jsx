@@ -50,14 +50,14 @@ const CustomNode = ({ data }) => {
         <div className={`text-sm text-center font-medium ${isDark ? 'text-blue-300' : 'text-blue-600'}`}>
           {data.title}
         </div>
-        <div
+        {/* <div
           className={`text-xs text-center mt-2 flex items-center justify-center ${
             isDark ? 'text-gray-400' : 'text-gray-500'
           }`}
         >
           <MapPin size={12} className="mr-1" />
           {data.location}
-        </div>
+        </div> */}
       </div>
 
       {data.hasChildren && (
@@ -116,54 +116,492 @@ const Hierarchy = () => {
   // Hierarchy Data
   const [hierarchyData] = useState([
     {
-      id: '1',
-      name: 'Tahsan Khan',
-      title: 'Founder - CEO',
-      location: 'Boston HQ',
-      children: [
+      "id": "1",
+      "name": "FA to ASD",
+      "children": [
         {
-          id: '2',
-          name: 'Harry Kane',
-          title: 'Engineering Manager',
-          location: 'London Office',
-          children: [
-            { id: '3', name: 'Azam Khan', title: 'Marketing', location: 'Boston HQ' },
-            { id: '4', name: 'Sara Lee', title: 'Software Engineer', location: 'London Office' },
-            { id: '5', name: 'John Doe', title: 'DevOps Engineer', location: 'Remote' },
-          ],
-        },
-        {
-          id: '6',
-          name: 'Tim David',
-          title: 'HR Management',
-          location: 'Boston HQ',
-          children: [
-            { id: '7', name: 'James James', title: 'Account Executive', location: 'Boston HQ' },
-            { id: '8', name: 'Emma Watson', title: 'Recruitment Specialist', location: 'Boston HQ' },
+          "id": "2",
+          "name": "TA to ASD",
+          "children": [
             {
-              id: '9',
-              name: 'Lisa Ray',
-              title: 'Training Coordinator',
-              location: 'Remote',
-              children: [
-                { id: '10', name: 'Mike Brown', title: 'Trainer', location: 'Remote' },
-                { id: '11', name: 'Anna Smith', title: 'Intern', location: 'Boston HQ' },
-              ],
-            },
-          ],
+              "id": "3",
+              "name": "ASD Sectt."
+            }
+          ]
         },
         {
-          id: '12',
-          name: 'Rachel Green',
-          title: 'CFO',
-          location: 'Boston HQ',
-          children: [
-            { id: '13', name: 'Tom Hardy', title: 'Financial Analyst', location: 'Boston HQ' },
-            { id: '14', name: 'Clara Oswald', title: 'Accountant', location: 'Remote' },
-          ],
+          "id": "4",
+          "name": "SO to ASD",
+          "children": [
+            {
+              "id": "5",
+              "name": "MSO"
+            }
+          ]
         },
-      ],
-    },
+        {
+          "id": "6",
+          "name": "CVO"
+        },
+        {
+          "id": "7",
+          "name": "Admiral Superintendent",
+          "children": [
+            {
+              "id": "8",
+              "name": "PMO"
+            },
+            {
+              "id": "9",
+              "name": "DPMO"
+            },
+            {
+              "id": "10",
+              "name": "GM ( R. )",
+              "children": [
+                {
+                  "id": "11",
+                  "name": "AGM (PP)",
+                  "children": [
+                    {
+                      "id": "12",
+                      "name": "DGM (PLC)",
+                      "children": [
+                        {
+                          "id": "13",
+                          "name": "MLSC"
+                        },
+                        {
+                          "id": "14",
+                          "name": "MRR"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "15",
+                      "name": "DGM (SP&NPL)",
+                      "children": [
+                        {
+                          "id": "16",
+                          "name": "MNPL"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "17",
+                      "name": "DGM (PLS)",
+                      "children": [
+                        {
+                          "id": "18",
+                          "name": "MCAP"
+                        },
+                        {
+                          "id": "19",
+                          "name": "MPLAS"
+                        },
+                        {
+                          "id": "20",
+                          "name": "MCOR"
+                        },
+                        {
+                          "id": "21",
+                          "name": "MFLOT"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "22",
+                      "name": "DGM (SUB)",
+                      "children": [
+                        {
+                          "id": "23",
+                          "name": "MSPT"
+                        },
+                        {
+                          "id": "24",
+                          "name": "MSUB"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "25",
+                  "name": "AGM (PR)",
+                  "children": [
+                    {
+                      "id": "26",
+                      "name": "DGM (ES)",
+                      "children": [
+                        {
+                          "id": "27",
+                          "name": "MMID"
+                        },
+                        {
+                          "id": "28",
+                          "name": "MENG"
+                        },
+                        {
+                          "id": "29",
+                          "name": "MSAX"
+                        },
+                        {
+                          "id": "30",
+                          "name": "MRAC"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "31",
+                  "name": "AGM (PS)",
+                  "children": [
+                    {
+                      "id": "32",
+                      "name": "MPGS"
+                    },
+                    {
+                      "id": "33",
+                      "name": "MGS"
+                    },
+                    {
+                      "id": "34",
+                      "name": "MGT"
+                    },
+                    {
+                      "id": "35",
+                      "name": "MMCD"
+                    }
+                  ]
+                },
+                {
+                  "id": "36",
+                  "name": "DGM (HULL)",
+                  "children": [
+                    {
+                      "id": "37",
+                      "name": "MFAB"
+                    },
+                    {
+                      "id": "38",
+                      "name": "MDS"
+                    },
+                    {
+                      "id": "39",
+                      "name": "MHP"
+                    },
+                    {
+                      "id": "40",
+                      "name": "MOUT"
+                    },
+                    {
+                      "id": "41",
+                      "name": "MDES"
+                    }
+                  ]
+                },
+                {
+                  "id": "42",
+                  "name": "DGM (WEA)",
+                  "children": [
+                    {
+                      "id": "43",
+                      "name": "MWEA (PR)"
+                    },
+                    {
+                      "id": "44",
+                      "name": "MWEA (TT)"
+                    },
+                    {
+                      "id": "45",
+                      "name": "MWEA(PJ)"
+                    }
+                  ]
+                },
+                {
+                  "id": "46",
+                  "name": "OI/C NRW"
+                },
+                {
+                  "id": "47",
+                  "name": "DGM (L)",
+                  "children": [
+                    {
+                      "id": "48",
+                      "name": "MELE"
+                    },
+                    {
+                      "id": "49",
+                      "name": "MECE"
+                    }
+                  ]
+                },
+                {
+                  "id": "50",
+                  "name": "MPC"
+                },
+                {
+                  "id": "51",
+                  "name": "DMPC"
+                },
+                {
+                  "id": "52",
+                  "name": "DGM (MAT)",
+                  "children": [
+                    {
+                      "id": "53",
+                      "name": "MMAT (LP)"
+                    },
+                    {
+                      "id": "54",
+                      "name": "MMAT (SC)"
+                    }
+                  ]
+                },
+                {
+                  "id": "55",
+                  "name": "DGM (COM)",
+                  "children": [
+                    {
+                      "id": "56",
+                      "name": "MCOM"
+                    }
+                  ]
+                },
+                {
+                  "id": "57",
+                  "name": "COY"
+                }
+              ]
+            },
+            {
+              "id": "58",
+              "name": "GM (T)",
+              "children": [
+                {
+                  "id": "59",
+                  "name": "DGM (SS)",
+                  "children": [
+                    {
+                      "id": "60",
+                      "name": "MSS"
+                    },
+                    {
+                      "id": "61",
+                      "name": "MCW"
+                    },
+                    {
+                      "id": "62",
+                      "name": "MDM"
+                    },
+                    {
+                      "id": "63",
+                      "name": "MDP"
+                    }
+                  ]
+                },
+                {
+                  "id": "64",
+                  "name": "DGM (YS)",
+                  "children": [
+                    {
+                      "id": "65",
+                      "name": "MPM"
+                    },
+                    {
+                      "id": "66",
+                      "name": "MYU"
+                    },
+                    {
+                      "id": "67",
+                      "name": "MDT"
+                    },
+                    {
+                      "id": "68",
+                      "name": "MYS"
+                    }
+                  ]
+                },
+                {
+                  "id": "69",
+                  "name": "CSFO",
+                  "children": [
+                    {
+                      "id": "70",
+                      "name": "MAA"
+                    },
+                    {
+                      "id": "71",
+                      "name": "CODSC"
+                    },
+                    {
+                      "id": "72",
+                      "name": "DDO"
+                    }
+                  ]
+                },
+                {
+                  "id": "73",
+                  "name": "DGM (RP)",
+                  "children": [
+                    {
+                      "id": "74",
+                      "name": "MYP"
+                    }
+                  ]
+                },
+                {
+                  "id": "75",
+                  "name": "AGM (MS)",
+                  "children": [
+                    {
+                      "id": "76",
+                      "name": "MIT"
+                    },
+                    {
+                      "id": "77",
+                      "name": "MIS"
+                    },
+                    {
+                      "id": "78",
+                      "name": "MFS"
+                    },
+                    {
+                      "id": "79",
+                      "name": "JD COST"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "80",
+              "name": "GM (HR)",
+              "children": [
+                {
+                  "id": "81",
+                  "name": "AGM (P&A)",
+                  "children": [
+                    {
+                      "id": "82",
+                      "name": "MPS"
+                    },
+                    {
+                      "id": "83",
+                      "name": "MDISC"
+                    },
+                    {
+                      "id": "84",
+                      "name": "MWEL"
+                    },
+                    {
+                      "id": "85",
+                      "name": "MIR"
+                    },
+                    {
+                      "id": "86",
+                      "name": "DLWC"
+                    },
+                    {
+                      "id": "87",
+                      "name": "MCE"
+                    }
+                  ]
+                },
+                {
+                  "id": "88",
+                  "name": "AGM (HR)",
+                  "children": [
+                    {
+                      "id": "89",
+                      "name": "MHRP"
+                    },
+                    {
+                      "id": "90",
+                      "name": "MHRTD"
+                    },
+                    {
+                      "id": "91",
+                      "name": "OI/C DAS"
+                    },
+                    {
+                      "id": "92",
+                      "name": "MPER"
+                    },
+                    {
+                      "id": "93",
+                      "name": "MFTD"
+                    }
+                  ]
+                },
+                {
+                  "id": "94",
+                  "name": "AGM (Safety)",
+                  "children": [
+                    {
+                      "id": "95",
+                      "name": "MSAF"
+                    },
+                    {
+                      "id": "96",
+                      "name": "AMSAF"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "97",
+              "name": "GM (QA)",
+              "children": [
+                {
+                  "id": "98",
+                  "name": "AGM (QA&LAB)",
+                  "children": [
+                    {
+                      "id": "99",
+                      "name": "MQA"
+                    },
+                    {
+                      "id": "100",
+                      "name": "MQC"
+                    },
+                    {
+                      "id": "101",
+                      "name": "MTH"
+                    },
+                    {
+                      "id": "102",
+                      "name": "MLAB"
+                    }
+                  ]
+                },
+                {
+                  "id": "103",
+                  "name": "DGM (DB)",
+                  "children": [
+                    {
+                      "id": "104",
+                      "name": "MDB"
+                    },
+                    {
+                      "id": "105",
+                      "name": "MRTC"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "106",
+              "name": "Oi/C/WED"
+            }
+          ]
+        }
+      ]
+    }
+,
   ]);
 
   // State for nodes, edges, and collapsed nodes

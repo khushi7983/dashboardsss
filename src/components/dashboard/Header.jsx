@@ -22,7 +22,7 @@ export default function Header({ toggleSidebar }) {
             >
               <Menu className="h-6 w-6" />
             </Button>
-            <div className="text-2xl font-bold text-primary animate-pulse">HR</div>
+            <div className="text-2xl font-bold text-primary animate-pulse">HR Dashboard</div>
           </div>
 
           <div className="flex items-center gap-3">

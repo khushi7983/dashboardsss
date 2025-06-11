@@ -28,6 +28,7 @@ export default function DashboardSidebar() {
   const navItems = [
     { icon: Home, label: "ASD", route: "/" },
     { icon: Users, label: "NDV", route: "/nvd_dashboard" },
+    { icon: Briefcase, label: "Deficiencies", route: "/dashboarddeficiencies" },
     {
       icon: Building,
       label: "Allied Units",
@@ -38,7 +39,7 @@ export default function DashboardSidebar() {
         { label: "SPV", route: "/spv" }
       ]
     },
-    { icon: Building, label: "Hierarchy", route: "/hierarchy" },
+    // { icon: Building, label: "Hierarchy", route: "/hierarchy" },
     // { icon: Building, label: "Company", route: "/company" },
     // { icon: Calendar, label: "Calendar", route: "/calendar" },
     // { icon: Briefcase, label: "Leave", route: "/leave" },

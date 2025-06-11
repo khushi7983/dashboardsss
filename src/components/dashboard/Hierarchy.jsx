@@ -117,7 +117,7 @@ const Hierarchy = () => {
   const [hierarchyData] = useState([
     {
       "id": "1",
-      "name": "FA to ASD",
+      "name": "Admiral Superintendent",
       "children": [
         {
           "id": "2",
@@ -129,23 +129,23 @@ const Hierarchy = () => {
             }
           ]
         },
-        {
-          "id": "4",
-          "name": "SO to ASD",
-          "children": [
-            {
-              "id": "5",
-              "name": "MSO"
-            }
-          ]
-        },
-        {
-          "id": "6",
-          "name": "CVO"
-        },
+        // {
+        //   "id": "4",
+        //   "name": "SO to ASD",
+        //   "children": [
+        //     {
+        //       "id": "5",
+        //       "name": "MSO"
+        //     }
+        //   ]
+        // },
+        // {
+        //   "id": "6",
+        //   "name": "CVO"
+        // },
         {
           "id": "7",
-          "name": "Admiral Superintendent",
+          "name": "FA to ASD",
           "children": [
             {
               "id": "8",
@@ -759,7 +759,7 @@ const Hierarchy = () => {
       <div className="mb-8 flex justify-between items-center">
         <div>
           <h4 className={`text-3xl font-bold tracking-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            People Directory
+          Organizational Structure
           </h4>
           <p className={`mt-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
             View and navigate the organizational structure

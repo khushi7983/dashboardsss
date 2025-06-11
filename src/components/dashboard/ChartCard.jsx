@@ -244,13 +244,13 @@ export default function ChartCard({ title, chartType, selectOptions, chartData, 
       
       // Improve legend labels styling
       chart.legend.labels.template.fill = am4core.color(theme === "dark" ? "#FFFFFF" : "#333333");
-      chart.legend.labels.template.fontSize = 12;
-      chart.legend.valueLabels.template.fontSize = 11;
+      chart.legend.labels.template.fontSize = 14;
+      chart.legend.valueLabels.template.fontSize = 14;
       chart.legend.valueLabels.template.fill = am4core.color(theme === "dark" ? "#D1D5DB" : "#4B5563");
       
       // Add more space between legend items
       chart.legend.itemContainers.template.paddingLeft = 5;
-      chart.legend.itemContainers.template.paddingRight = 10;
+      chart.legend.itemContainers.template.paddingRight = 0;
       chart.legend.itemContainers.template.marginBottom = 3;
       
       // Add value to legend labels

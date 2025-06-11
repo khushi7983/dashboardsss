@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import DashboardNDV from "./components/dashboard/DashboardNDV";
 import DashboardSidebar from "./components/dashboard/DashboardSidebar"; // Default import
 import { SidebarWrapper } from "./components/dashboard/DashboardSidebar"; // Named import
+import DashboardDeficiencies from "./components/dashboard/DashboardDeficiencies";
 import { useSidebar } from "@/components/ui/sidebar"; // Ensure this is the correct path
 import "./index.css";
 import Header from "./components/dashboard/Header";
@@ -25,6 +26,7 @@ function DashboardLayout() {
       <Route path="/" element={<DashboardASD />} />
       <Route path="/nvd_dashboard" element={<DashboardNDV />} />
       <Route path="/hr_dashboard" element={<DashboardHr />} />
+      <Route path="/dashboarddeficiencies" element={<DashboardDeficiencies />} />
       <Route path="/hierarchy" element={<Hierarchy />} />
     </Routes>
   </div>

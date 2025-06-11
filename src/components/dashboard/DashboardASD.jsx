@@ -12,7 +12,7 @@ import TeamActivity from "./TeamActivity";
 import DepartmentLeads from "./DepartmentLeads";
 import { useTheme } from "./ThemeProvider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -84,6 +84,7 @@ export default function DashboardASD() {
   ];
 
   const trades = ["All", "TA+", "FM", "CM", "HSK I", "HSK II", "SK", "TMM"];
+  const event = ["All", "Republic Day", "Independence Day", "Navy Day"];
   const ageOptions = ["All", "Below 35", "35-45", "Above 45"];
   const healthStatuses = ["All", "Medical Pending", "HT", "DIAB", "HT + DIAB"];
   const awardTypes = ["All", "ASD Cash", "CNC Cash",
@@ -167,7 +168,7 @@ export default function DashboardASD() {
 
   // Inline CSS for date input to match theme and UI
   const dateInputStyle = {
-    width: '200px',
+    width: '150px',
     padding: '8px 12px',
     borderRadius: '6px',
     border: `1px solid ${theme === "dark" ? '#374151' : '#d1d5db'}`,
@@ -220,7 +221,10 @@ export default function DashboardASD() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <StatsCard background={'#2b7fff'} icon={Users} label="Sanction" value="7000" bgcolor={'#133b78'} percent={70} />
             <StatsCard background={'#f0b100'} icon={Building} label="Borne" value="5400" bgcolor={'#765e1a'} percent={30} />
-            <StatsCard background={'#f4444d'} icon={Briefcase} label="Deficency" value="1600" bgcolor={'#60161a'} percent={3} />
+            {/* See detailed deficiency dashboard: */}
+            <a href="/dashboarddeficiencies" className="block">
+              <StatsCard background={'#f4444d'} icon={Briefcase} label="Deficiency" value="1600" bgcolor={'#60161a'} percent={3} />
+            </a>
             <StatsCard background={'#269156'} icon={DollarSign} label="Deficency Percentage" value="22.3%" bgcolor={'#124c2c'} percent={58} />
           </div>
 
@@ -262,7 +266,7 @@ export default function DashboardASD() {
                   onValueChange={(value) => setTradeFilters({ ...tradeFilters, trade: value })}
                 >
                   <SelectTrigger
-                    className={`w-[200px] ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
+                    className={`w-[150px] ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
                       }`}
                   >
                     <SelectValue placeholder="Select Trade" />
@@ -303,6 +307,16 @@ export default function DashboardASD() {
                   style={dateInputStyle}
                   placeholder="Select Date"
                 />
+                <input
+                  type="date"
+                  value={tradeFilters.date || ''}
+                  onChange={(e) => {
+                    setTradeFilters({ ...tradeFilters, date: e.target.value });
+                    handleDatePickerClick("Trade Wise", e.target.value);
+                  }}
+                  style={dateInputStyle}
+                  placeholder="Select Date"
+                />
               </div>
               <div className="overflow-x-auto">
                 <Table
@@ -315,7 +329,7 @@ export default function DashboardASD() {
                         }`}
                     >
                       <TableHead className="font-semibold">Trade</TableHead>
-                      <TableHead className="font-semibold">Date</TableHead>
+                      {/* <TableHead className="font-semibold">Date</TableHead> */}
                       <TableHead className="font-semibold text-center">Total</TableHead>
                       <TableHead className="font-semibold text-center">Below 35</TableHead>
                       <TableHead className="font-semibold text-center">35-45</TableHead>
@@ -334,7 +348,7 @@ export default function DashboardASD() {
                           className={theme === "dark" ? "hover:bg-gray-600" : "hover:bg-gray-200"}
                         >
                           <TableCell className="font-semibold">{item.trade}</TableCell>
-                          <TableCell>{item.date}</TableCell>
+                          {/* <TableCell>{item.date}</TableCell> */}
                           <TableCell className="text-center">{item.count}</TableCell>
                           <TableCell className="text-center">{item.below35}</TableCell>
                           <TableCell className="text-center">{item.age35to45}</TableCell>
@@ -396,7 +410,7 @@ export default function DashboardASD() {
                       onValueChange={(value) => setTrrdFilters({ ...trrdFilters, trade: value })}
                     >
                       <SelectTrigger
-                        className={`w-[200px] ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
+                        className={`w-[150px] ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
                           }`}
                       >
                         <SelectValue placeholder="Select Trade" />
@@ -437,6 +451,16 @@ export default function DashboardASD() {
                       style={dateInputStyle}
                       placeholder="Select Date"
                     />
+                    <input
+                      type="date"
+                      value={tradeFilters.date || ''}
+                      onChange={(e) => {
+                        setTradeFilters({ ...tradeFilters, date: e.target.value });
+                        handleDatePickerClick("Trade Wise", e.target.value);
+                      }}
+                      style={dateInputStyle}
+                      placeholder="Select Date"
+                    />
                   </div>
                   <div className="overflow-x-auto pt-2">
                     <Table
@@ -449,7 +473,7 @@ export default function DashboardASD() {
                             }`}
                         >
                           <TableHead className="font-semibold">Trade</TableHead>
-                          <TableHead className="font-semibold">Date</TableHead>
+                          {/* <TableHead className="font-semibold">Date</TableHead> */}
                           <TableHead className="font-semibold text-center">Total</TableHead>
                           <TableHead className="font-semibold text-center">Below 35</TableHead>
                           <TableHead className="font-semibold text-center">35-45</TableHead>
@@ -468,7 +492,7 @@ export default function DashboardASD() {
                               className={theme === "dark" ? "hover:bg-gray-600" : "hover:bg-gray-200"}
                             >
                               <TableCell className="font-semibold">{item.trade}</TableCell>
-                              <TableCell>{item.date}</TableCell>
+                              {/* <TableCell>{item.date}</TableCell> */}
                               <TableCell className="text-center">{item.count}</TableCell>
                               <TableCell className="text-center">{item.below35}</TableCell>
                               <TableCell className="text-center">{item.age35to45}</TableCell>
@@ -496,7 +520,7 @@ export default function DashboardASD() {
                   onValueChange={(value) => setHealthFilters({ ...healthFilters, status: value })}
                 >
                   <SelectTrigger
-                    className={`w-[200px] ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
+                    className={`w-[150px] ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
                       }`}
                   >
                     <SelectValue placeholder="Select Status" />
@@ -537,6 +561,16 @@ export default function DashboardASD() {
                   style={dateInputStyle}
                   placeholder="Select Date"
                 />
+                <input
+                  type="date"
+                  value={tradeFilters.date || ''}
+                  onChange={(e) => {
+                    setTradeFilters({ ...tradeFilters, date: e.target.value });
+                    handleDatePickerClick("Trade Wise", e.target.value);
+                  }}
+                  style={dateInputStyle}
+                  placeholder="Select Date"
+                />
               </div>
               <div className="overflow-x-auto">
                 <Table
@@ -549,7 +583,7 @@ export default function DashboardASD() {
                         }`}
                     >
                       <TableHead className="font-semibold">Status</TableHead>
-                      <TableHead className="font-semibold">Date</TableHead>
+                      {/* <TableHead className="font-semibold">Date</TableHead> */}
                       <TableHead className="font-semibold text-center">Total</TableHead>
                       <TableHead className="font-semibold text-center">Below 35</TableHead>
                       <TableHead className="font-semibold text-center">35-45</TableHead>
@@ -568,7 +602,7 @@ export default function DashboardASD() {
                           className={theme === "dark" ? "hover:bg-gray-600" : "hover:bg-gray-200"}
                         >
                           <TableCell className="font-semibold">{item.status}</TableCell>
-                          <TableCell>{item.date}</TableCell>
+                          {/* <TableCell>{item.date}</TableCell> */}
                           <TableCell className="text-center">{item.count}</TableCell>
                           <TableCell className="text-center">{item.below35}</TableCell>
                           <TableCell className="text-center">{item.age35to45}</TableCell>
@@ -618,7 +652,7 @@ export default function DashboardASD() {
                     <SelectValue placeholder="Select Trade" />
                   </SelectTrigger>
                   <SelectContent>
-                    {trades.map((trade) => (
+                    {event.map((trade) => (
                       <SelectItem key={trade} value={trade}>
                         {trade}
                       </SelectItem>
@@ -653,6 +687,16 @@ export default function DashboardASD() {
                   style={dateInputStyle}
                   placeholder="Select Date"
                 />
+                <input
+                  type="date"
+                  value={tradeFilters.date || ''}
+                  onChange={(e) => {
+                    setTradeFilters({ ...tradeFilters, date: e.target.value });
+                    handleDatePickerClick("Trade Wise", e.target.value);
+                  }}
+                  style={dateInputStyle}
+                  placeholder="Select Date"
+                />
               </div>
               <div className="overflow-x-auto">
                 <Table
@@ -666,7 +710,7 @@ export default function DashboardASD() {
                     >
                       <TableHead className="font-semibold">Award Type</TableHead>
                       {/* <TableHead className="font-semibold">Trade</TableHead>  */}
-                      <TableHead className="font-semibold">Date</TableHead>
+                      {/* <TableHead className="font-semibold">Date</TableHead> */}
                       <TableHead className="font-semibold text-center">Total</TableHead>
                       {/* <TableHead className="font-semibold text-center">Below 35</TableHead>
                       <TableHead className="font-semibold text-center">35-45</TableHead>
@@ -686,7 +730,7 @@ export default function DashboardASD() {
                         >
                           <TableCell className="font-semibold">{item.type}</TableCell>
                           {/* <TableCell>{item.trade}</TableCell>  */}
-                          <TableCell>{item.date}</TableCell>
+                          {/* <TableCell>{item.date}</TableCell> */}
                           <TableCell className="text-center">{item.count}</TableCell>
                           {/* <TableCell className="text-center">{item.below35}</TableCell>
                           <TableCell className="text-center">{item.age35to45}</TableCell>

@@ -75,28 +75,32 @@ export default function DashboardNDV() {
   ];
 
   const awardsData = [
-    { type: "Excellence", trade: "TA+", count: 80, below35: 35, age35to45: 25, above45: 20, date: "2025-01-05" },
-    { type: "Innovation", trade: "FM", count: 60, below35: 25, age35to45: 20, above45: 15, date: "2025-02-10" },
-    { type: "Leadership", trade: "CM", count: 70, below35: 30, age35to45: 25, above45: 15, date: "2025-03-05" },
-    { type: "Teamwork", trade: "HSK I", count: 40, below35: 15, age35to45: 15, above45: 10, date: "2025-01-15" },
-    { type: "Excellence", trade: "HSK II", count: 50, below35: 20, age35to45: 15, above45: 15, date: "2025-02-20" },
-    { type: "Innovation", trade: "SK", count: 65, below35: 30, age35to45: 20, above45: 15, date: "2025-03-10" },
-    { type: "Leadership", trade: "TMM", count: 55, below35: 20, age35to45: 20, above45: 15, date: "2025-04-01" },
+    { type: "ASD Cash", count: 12, below35: 5, age35to45: 4, above45: 3, date: "2025-01-05" },
+    { type: "CNC Cash", count: 8, below35: 3, age35to45: 3, above45: 2, date: "2025-02-10" },
+    { type: "CNC Commendation", count: 10, below35: 4, age35to45: 4, above45: 2, date: "2025-03-05" },
+    { type: "CNS Cash", count: 6, below35: 2, age35to45: 2, above45: 2, date: "2025-01-15" },
+    { type: "CNS Commendation", count: 7, below35: 3, age35to45: 2, above45: 2, date: "2025-02-20" },
+    { type: "SHRAM Awards", count: 9, below35: 4, age35to45: 3, above45: 2, date: "2025-03-10" },
   ];
 
   const trades = ["All", "TA+", "FM", "CM", "HSK I", "HSK II", "SK", "TMM"];
   const ageOptions = ["All", "Below 35", "35-45", "Above 45"];
+  const event = ["All", "Republic Day", "Independence Day", "Navy Day"];
   const healthStatuses = ["All", "Medical Pending", "HT", "DIAB", "HT + DIAB"];
-  const awardTypes = ["All", "Excellence", "Innovation", "Leadership", "Teamwork"];
+  const awardTypes = ["All", "ASD Cash", "CNC Cash",
+    "CNC Commendation",
+    "CNS Cash",
+    "CNS Commendation",
+    "SHRAM Awards"];
 
   useEffect(() => {
     setChartData({
       pie: [
-        { category: "NDV", sanction: 6000, borne: 4400, colorStart: "#FF6349", colorEnd: "#B22222", label: "Network Development" },
-        { category: "AOB", sanction: 200, borne: 150, colorStart: "#1E90FF", colorEnd: "#0000CD", label: "Administrative Officer Battalions" },
-        { category: "OWC", sanction: 800, borne: 600, colorStart: "#FFD700", colorEnd: "#FFA500", label: "Operational Warfare Center" },
-        { category: "NRW", sanction: 400, borne: 300, colorStart: "#FFFFFF", colorEnd: "#F5F5F5", label: "Navigation Repair Workshop" },
-        { category: "SPV", sanction: 600, borne: 450, colorStart: "#FF6347", colorEnd: "#B22222", label: "Special Project Vessel" },
+        { category: "PMO", sanction: 6000, borne: 4400, colorStart: "#FF6349", colorEnd: "#B22222", label: "Network Development" },
+        { category: "GM(R)", sanction: 200, borne: 150, colorStart: "#1E90FF", colorEnd: "#0000CD", label: "Administrative Officer Battalions" },
+        { category: "GM(T)", sanction: 800, borne: 600, colorStart: "#FFD700", colorEnd: "#FFA500", label: "Operational Warfare Center" },
+        { category: "GM(HR)", sanction: 400, borne: 300, colorStart: "#FFFFFF", colorEnd: "#F5F5F5", label: "Navigation Repair Workshop" },
+        { category: "GM(QA)", sanction: 600, borne: 450, colorStart: "#FF6347", colorEnd: "#B22222", label: "Special Project Vessel" },
       ],
       bar: [
         { category: "2018", Industrial: 300, NonIndustrial: 150 },
@@ -164,7 +168,7 @@ export default function DashboardNDV() {
 
   // Inline CSS for date input to match theme and UI
   const dateInputStyle = {
-    width: '200px',
+    width: '150px',
     padding: '8px 12px',
     borderRadius: '6px',
     border: `1px solid ${theme === "dark" ? '#374151' : '#d1d5db'}`,
@@ -202,15 +206,20 @@ export default function DashboardNDV() {
         </ol>
       </nav>
 
-      {/* Page Header */}
       <div className="mb-8">
-        <h4
-          className={`text-3xl font-bold tracking-tight ${
-            theme === "dark" ? "text-white" : "text-gray-900"
-          }`}
-        >
-          ND(V) Dashboard
-        </h4>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 items-center">
+          <h4 className={`text-3xl font-bold tracking-tight ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+            ND(V) Dashboard
+          </h4>
+          <div className="flex justify-end">
+            <a
+              href="/hierarchy"
+              className={`px-4 py-2 text-xl ${theme === "dark" ? "text-white" : "text-gray-900"} bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 rounded-lg shadow-md`}
+            >
+              Hierarchy
+            </a>
+          </div>
+        </div>
       </div>
 
       <div className="gap-4">
@@ -218,7 +227,8 @@ export default function DashboardNDV() {
         <div className="lg:col-span-9 space-y-4">
           {/* Stats Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                      <StatsCard background={'#2b7fff'} icon={Users} label="Sanction" value="6000" bgcolor={'#133b78'} percent={70} />
+                      <StatsCard background={'#2b7fff'} icon
+                      ={Users} label="Sanction" value="6000" bgcolor={'#133b78'} percent={70} />
                       <StatsCard background={'#f0b100'} icon={Building} label="Borne" value="4400" bgcolor={'#765e1a'} percent={30} />
                       <StatsCard background={'#f4444d'} icon={Briefcase} label="Deficency" value="1200" bgcolor={'#60161a'} percent={3} />
                       <StatsCard background={'#269156'} icon={DollarSign} label="Deficency Percentage" value="27.3%" bgcolor={'#124c2c'} percent={58} />
@@ -264,7 +274,7 @@ export default function DashboardNDV() {
                   onValueChange={(value) => setTradeFilters({ ...tradeFilters, trade: value })}
                 >
                   <SelectTrigger
-                    className={`w-[200px] ${
+                    className={`w-[150px] ${
                       theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
                     }`}
                   >
@@ -307,6 +317,16 @@ export default function DashboardNDV() {
                   style={dateInputStyle}
                   placeholder="Select Date"
                 />
+                 <input
+                  type="date"
+                  value={tradeFilters.date || ""}
+                  onChange={(e) => {
+                    setTradeFilters({ ...tradeFilters, date: e.target.value });
+                    handleDatePickerClick("Trade Wise", e.target.value);
+                  }}
+                  style={dateInputStyle}
+                  placeholder="Select Date"
+                />
               </div>
               <div className="overflow-x-auto">
                 <Table
@@ -321,7 +341,7 @@ export default function DashboardNDV() {
                       }`}
                     >
                       <TableHead className="font-semibold">Trade</TableHead>
-                      <TableHead className="font-semibold">Date</TableHead>
+                      {/* <TableHead className="font-semibold">Date</TableHead> */}
                       <TableHead className="font-semibold text-center">Total</TableHead>
                       <TableHead className="font-semibold text-center">Below 35</TableHead>
                       <TableHead className="font-semibold text-center">35-45</TableHead>
@@ -340,7 +360,7 @@ export default function DashboardNDV() {
                           className={theme === "dark" ? "hover:bg-gray-600" : "hover:bg-gray-200"}
                         >
                           <TableCell className="font-semibold">{item.trade}</TableCell>
-                          <TableCell>{item.date}</TableCell>
+                          {/* <TableCell>{item.date}</TableCell> */}
                           <TableCell className="text-center">{item.count}</TableCell>
                           <TableCell className="text-center">{item.below35}</TableCell>
                           <TableCell className="text-center">{item.age35to45}</TableCell>
@@ -408,7 +428,7 @@ export default function DashboardNDV() {
                       onValueChange={(value) => setTrrdFilters({ ...trrdFilters, trade: value })}
                     >
                       <SelectTrigger
-                        className={`w-[200px] ${
+                        className={`w-[150px] ${
                           theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
                         }`}
                       >
@@ -451,6 +471,16 @@ export default function DashboardNDV() {
                       style={dateInputStyle}
                       placeholder="Select Date"
                     />
+                    <input
+                      type="date"
+                      value={trrdFilters.date || ""}
+                      onChange={(e) => {
+                        setTrrdFilters({ ...trrdFilters, date: e.target.value });
+                        handleDatePickerClick("TRRD", e.target.value);
+                      }}
+                      style={dateInputStyle}
+                      placeholder="Select Date"
+                    />
                   </div>
                   <div className="overflow-x-auto pt-2">
                     <Table
@@ -465,7 +495,7 @@ export default function DashboardNDV() {
                           }`}
                         >
                           <TableHead className="font-semibold">Trade</TableHead>
-                          <TableHead className="font-semibold">Date</TableHead>
+                          {/* <TableHead className="font-semibold">Date</TableHead> */}
                           <TableHead className="font-semibold text-center">Total</TableHead>
                           <TableHead className="font-semibold text-center">Below 35</TableHead>
                           <TableHead className="font-semibold text-center">35-45</TableHead>
@@ -484,7 +514,7 @@ export default function DashboardNDV() {
                               className={theme === "dark" ? "hover:bg-gray-600" : "hover:bg-gray-200"}
                             >
                               <TableCell className="font-semibold">{item.trade}</TableCell>
-                              <TableCell>{item.date}</TableCell>
+                              {/* <TableCell>{item.date}</TableCell> */}
                               <TableCell className="text-center">{item.count}</TableCell>
                               <TableCell className="text-center">{item.below35}</TableCell>
                               <TableCell className="text-center">{item.age35to45}</TableCell>
@@ -514,7 +544,7 @@ export default function DashboardNDV() {
                   onValueChange={(value) => setHealthFilters({ ...healthFilters, status: value })}
                 >
                   <SelectTrigger
-                    className={`w-[200px] ${
+                    className={`w-[150px] ${
                       theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
                     }`}
                   >
@@ -557,6 +587,16 @@ export default function DashboardNDV() {
                   style={dateInputStyle}
                   placeholder="Select Date"
                 />
+                <input
+                      type="date"
+                      value={trrdFilters.date || ""}
+                      onChange={(e) => {
+                        setTrrdFilters({ ...trrdFilters, date: e.target.value });
+                        handleDatePickerClick("TRRD", e.target.value);
+                      }}
+                      style={dateInputStyle}
+                      placeholder="Select Date"
+                    />
               </div>
               <div className="overflow-x-auto">
                 <Table
@@ -571,7 +611,7 @@ export default function DashboardNDV() {
                       }`}
                     >
                       <TableHead className="font-semibold">Status</TableHead>
-                      <TableHead className="font-semibold">Date</TableHead>
+                      {/* <TableHead className="font-semibold">Date</TableHead> */}
                       <TableHead className="font-semibold text-center">Total</TableHead>
                       <TableHead className="font-semibold text-center">Below 35</TableHead>
                       <TableHead className="font-semibold text-center">35-45</TableHead>
@@ -590,7 +630,7 @@ export default function DashboardNDV() {
                           className={theme === "dark" ? "hover:bg-gray-600" : "hover:bg-gray-200"}
                         >
                           <TableCell className="font-semibold">{item.status}</TableCell>
-                          <TableCell>{item.date}</TableCell>
+                          {/* <TableCell>{item.date}</TableCell> */}
                           <TableCell className="text-center">{item.count}</TableCell>
                           <TableCell className="text-center">{item.below35}</TableCell>
                           <TableCell className="text-center">{item.age35to45}</TableCell>
@@ -618,7 +658,7 @@ export default function DashboardNDV() {
                   onValueChange={(value) => setAwardFilters({ ...awardFilters, type: value })}
                 >
                   <SelectTrigger
-                    className={`w-[200px] ${
+                    className={`w-[150px] ${
                       theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
                     }`}
                   >
@@ -637,14 +677,14 @@ export default function DashboardNDV() {
                   onValueChange={(value) => setAwardFilters({ ...awardFilters, trade: value })}
                 >
                   <SelectTrigger
-                    className={`w-[200px] ${
+                    className={`w-[150px] ${
                       theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-white"
                     }`}
                   >
                     <SelectValue placeholder="Select Trade" />
                   </SelectTrigger>
                   <SelectContent>
-                    {trades.map((trade) => (
+                    {event.map((trade) => (
                       <SelectItem key={trade} value={trade}>
                         {trade}
                       </SelectItem>
@@ -680,6 +720,16 @@ export default function DashboardNDV() {
                   style={dateInputStyle}
                   placeholder="Select Date"
                 />
+                <input
+                      type="date"
+                      value={trrdFilters.date || ""}
+                      onChange={(e) => {
+                        setTrrdFilters({ ...trrdFilters, date: e.target.value });
+                        handleDatePickerClick("TRRD", e.target.value);
+                      }}
+                      style={dateInputStyle}
+                      placeholder="Select Date"
+                    />
               </div>
               <div className="overflow-x-auto">
                 <Table
@@ -695,7 +745,7 @@ export default function DashboardNDV() {
                     >
                       <TableHead className="font-semibold">Award Type</TableHead>
                       <TableHead className="font-semibold">Trade</TableHead>
-                      <TableHead className="font-semibold">Date</TableHead>
+                      {/* <TableHead className="font-semibold">Date</TableHead> */}
                       <TableHead className="font-semibold text-center">Total</TableHead>
                       <TableHead className="font-semibold text-center">Below 35</TableHead>
                       <TableHead className="font-semibold text-center">35-45</TableHead>
@@ -715,7 +765,7 @@ export default function DashboardNDV() {
                         >
                           <TableCell className="font-semibold">{item.type}</TableCell>
                           <TableCell>{item.trade}</TableCell>
-                          <TableCell>{item.date}</TableCell>
+                          {/* <TableCell>{item.date}</TableCell> */}
                           <TableCell className="text-center">{item.count}</TableCell>
                           <TableCell className="text-center">{item.below35}</TableCell>
                           <TableCell className="text-center">{item.age35to45}</TableCell>
